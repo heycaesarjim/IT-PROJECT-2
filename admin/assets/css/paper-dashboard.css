@@ -2745,6 +2745,19 @@ textarea.form-control {
 
   .main-panel > .content {
     padding-left: 0;
+
+    .yes{
+  background-color: #04871c;
+  border-color:#04871c;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.no{
+  background-color: #d90825;
+  border-color: #d90825;
+  color: #fff;
+}
     padding-right: 0; }
 
   .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
