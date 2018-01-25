@@ -37,6 +37,8 @@
 
         <link rel="stylesheet" href="assets/css/bootstrapv3.3.7.css">
 
+        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
     </head>
 
     <body>
@@ -166,9 +168,9 @@
 
                                             </form>
 
-                                            <p>Generate report in <button type="submit" class="btn btn-info btn-fill btn-wd">Excel</button> <button type="submit" class="btn btn-info btn-fill btn-wd">PDF</button> </p>
+                                            <p>Generate report in <button type="submit" class="btn btn-success"><i class = "fa fa-file-excel-o"></i> Excel</button> <button type="submit" class="btn btn-danger"><i class="  fa fa-file-pdf-o"></i> PDF</button> </p>
 
-                                            <div class="tab">
+                                            <!-- <div class="tab">
 
                                               <button class="tablinks" onclick="openCity(event, 'transactions')">Transactions</button>
 
@@ -178,9 +180,16 @@
 
                                               <button class="tablinks" onclick="openCity(event, 'removedItems')">Removed Items</button>
 
-                                            </div>
+                                            </div> -->
 
                                         </div>
+
+                                        <ul class="nav nav-pills">
+                                        <li class="active"><a href="active">Transaction</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Items Added</a></li>
+                                        <li><a href="#">Removed Items</a></li>
+                                        </ul>
 
                                     </div>
 
@@ -255,7 +264,7 @@
             </div>
 
         </div>
-        
+
     </body>
 
     <!--   Core JS Files   -->
