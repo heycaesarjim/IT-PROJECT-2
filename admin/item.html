@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
+
     <head>
+
         <meta charset="utf-8" />
         <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
         <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
@@ -32,12 +34,15 @@
         <link rel="stylesheet" href="assets/css/bootstrapv3.3.7.css">
 
     </head>
+
     <body>
 
         <div class="wrapper">
+
             <div class="sidebar" data-background-color="white" data-active-color="danger">
 
                 <div class="sidebar-wrapper">
+
                     <div class="logo">
                         <a href="dashboard.html" class="simple-text">
                             JERNIXON MOTORPARTS AND ACCESSORIES
@@ -45,37 +50,48 @@
                     </div>
 
                     <ul class="nav">
+
                         <li>
                             <a href="dashboard.html">
                                 <i class="ti-panel"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
+
                         <li>
                             <a href="report.html">
                                 <i class="ti-clipboard"></i>
                                 <p>Reports</p>
                             </a>
                         </li>
+
                         <li class="active">
                             <a href="item.html">
                                 <i class="ti-view-list-alt"></i>
                                 <p>Items</p>
                             </a>
                         </li>
+
                         <li>
                             <a href="employee.html">
                                 <i class="ti-user"></i>
                                 <p>Employees</p>
                             </a>
                         </li>
+
                     </ul>
+
                 </div>
-            </div>
+
+            </div> 
+            <!-- end os side navigation -->
 
             <div class="main-panel">
+
                 <nav class="navbar navbar-default">
+
                     <div class="container-fluid">
+
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle">
                                 <span class="sr-only">Toggle navigation</span>
@@ -85,7 +101,9 @@
                             </button>
                             <a class="navbar-brand" href="#"><i class="ti-view-list-alt"> </i>Items</a>
                         </div>
+
                         <div class="collapse navbar-collapse">
+
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -102,115 +120,134 @@
                                     </ul>
                                 </li>
                             </ul>
+
                         </div>
+
                     </div>
+
                 </nav>
 
 
-                            <div class="content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="card">
-                                                <div class="header">
+                <div class="content">
 
-                                                    <div class = "content">
+                    <div class="container-fluid">
 
-                                                        <form class = "form-inline">
+                        <div class="row">
 
-                                                            <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                <label><i class = "ti-search"></i> Search</label>
-                                                                    <input type="text" class="form-control border-input" placeholder="Enter name of item">
+                            <div class="col-md-12">
 
-                                                                </div>
-                                                            </div>
+                                <div class="card">
+
+                                    <div class="header">
+
+                                        <div class = "content">
+
+                                            <form class = "form-inline">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-4">
+
+                                                        <div class="form-group">
+
+                                                            <label><i class = "ti-search"></i> Search</label>
+                                                            <input type="text" class="form-control border-input" placeholder="Enter name of item">
+
                                                         </div>
-
-                                                        </form>
 
                                                     </div>
 
-                                                <div class="tab">
-
-                                                  <button class="tablinks" onclick="openCity(event, 'edit')">Edit</button>
-
-                                                  <button class="tablinks" onclick="openCity(event, 'add')">Add</button>
-
-                                                  <button class="tablinks" onclick="openCity(event, 'subtract')">Subtract</button>
-
-                                                  <button class="tablinks" onclick="openCity(event, 'return')">Return</button>
-
                                                 </div>
 
-                                                </div>
-                                                <div class="content table-responsive table-full-width">
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <th>ID</th>
-                                                            <th>Name</th>
-                                                            <th>Salary</th>
-                                                            <th>Country</th>
-                                                            <th>City</th>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Dakota Rice</td>
-                                                                <td>$36,738</td>
-                                                                <td>Niger</td>
-                                                                <td>Oud-Turnhout</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>Minerva Hooper</td>
-                                                                <td>$23,789</td>
-                                                                <td>Curaçao</td>
-                                                                <td>Sinaai-Waas</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>Sage Rodriguez</td>
-                                                                <td>$56,142</td>
-                                                                <td>Netherlands</td>
-                                                                <td>Baileux</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>4</td>
-                                                                <td>Philip Chaney</td>
-                                                                <td>$38,735</td>
-                                                                <td>Korea, South</td>
-                                                                <td>Overland Park</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>5</td>
-                                                                <td>Doris Greene</td>
-                                                                <td>$63,542</td>
-                                                                <td>Malawi</td>
-                                                                <td>Feldkirchen in Kärnten</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>6</td>
-                                                                <td>Mason Porter</td>
-                                                                <td>$78,615</td>
-                                                                <td>Chile</td>
-                                                                <td>Gloucester</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                            </form>
 
-                                                </div>
-                                            </div>
                                         </div>
+
+                                        <div class="tab">
+
+                                          <button class="tablinks" onclick="openCity(event, 'edit')">Edit</button>
+
+                                          <button class="tablinks" onclick="openCity(event, 'add')">Add</button>
+
+                                          <button class="tablinks" onclick="openCity(event, 'subtract')">Subtract</button>
+
+                                          <button class="tablinks" onclick="openCity(event, 'return')">Return</button>
+
+                                        </div>
+
                                     </div>
+
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Salary</th>
+                                                <th>Country</th>
+                                                <th>City</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Dakota Rice</td>
+                                                    <td>$36,738</td>
+                                                    <td>Niger</td>
+                                                    <td>Oud-Turnhout</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Minerva Hooper</td>
+                                                    <td>$23,789</td>
+                                                    <td>Curaçao</td>
+                                                    <td>Sinaai-Waas</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Sage Rodriguez</td>
+                                                    <td>$56,142</td>
+                                                    <td>Netherlands</td>
+                                                    <td>Baileux</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Philip Chaney</td>
+                                                    <td>$38,735</td>
+                                                    <td>Korea, South</td>
+                                                    <td>Overland Park</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Doris Greene</td>
+                                                    <td>$63,542</td>
+                                                    <td>Malawi</td>
+                                                    <td>Feldkirchen in Kärnten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>Mason Porter</td>
+                                                    <td>$78,615</td>
+                                                    <td>Chile</td>
+                                                    <td>Gloucester</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
-            </div>
+
+             </div>
+
         </div>
+
     </body>
 
     <!--   Core JS Files   -->
@@ -231,8 +268,5 @@
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
     <script src="assets/js/paper-dashboard.js"></script>
-
-    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-    <script src="assets/js/demo.js"></script>
 
 </html>
