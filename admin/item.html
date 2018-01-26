@@ -31,8 +31,7 @@
         <!-- tab style -->
         <link href="assets/css/tab.css" rel="stylesheet">
 
-        <!-- search style -->
-        <link href="assets/css/search.css" rel="stylesheet">
+        
 
         <link rel="stylesheet" href="assets/css/bootstrapv3.3.7.css">
 
@@ -151,7 +150,7 @@
 
                                                     <div class="col-md-12">
 
-                                                        <!-- <label><i class = "ti-search"></i> Search</label> -->
+                                                        <label><i class = "ti-search"></i> Search</label>
                                                         <input type="text" class="form-control border-input" placeholder="Enter name of item">
 
                                                     </div>
@@ -279,43 +278,49 @@
                                 <div class="form-group">
                                     
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3 text-right">
                                             <label>Description:</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control border-input" form="addnewform">
 
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3 text-right">
                                             <label>Quantity in Stock:</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="number" form="addnewform" class="form-control border-input">
 
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3 text-right">
                                             <label>WholeSale price:</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="number" form="addnewform" class="form-control border-input">
 
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3 text-right">
                                             <label>Retail price:</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="number" form="addnewform" class="form-control border-input">
 
                                         </div>
                                     </div>
-                                    
-
+                                </div>
+                                <div class="form-group">
                                     <div class="row">
                                         <div class="text-right">                                           
                                         <div class="col-md-12">                                                    
@@ -565,11 +570,10 @@
                             <h4>Return of Item</h4>
 
                             <form id="returnform" action = "" method="post" class="ajax">
-                                
-                                <div class="form-group">
-                                    
+
+                                <div class="form-group">                                
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 text-right">
                                             <label>Customer Name:</label>
                                         </div>
                                         <div class="col-md-9">
@@ -577,8 +581,11 @@
 
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 text-right">
                                             <label>Item Purchased:</label>
                                         </div>
                                         <div class="col-md-9">
@@ -589,8 +596,11 @@
 
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 text-right">
                                             <label>Quantity:</label>
                                         </div>
                                         <div class="col-md-9">
@@ -598,8 +608,11 @@
 
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 text-right">
                                             <label>Total price:</label>
                                         </div>
                                         <div class="col-md-9">
@@ -607,33 +620,43 @@
 
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <label>Reason</label>                                            
+                                        <div class="col-md-3 text-right">
+                                            <label>Reason:</label>                                            
                                         </div>
                                         <div class="col-md-9">
                                             <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <label>Status</label>                                            
+                                        <div class="col-md-3 text-right">
+                                            <label>Status:</label>                                            
                                         </div>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" form="returnform" name="status">
                                         </div>
                                     </div>
+                                </div>
 
+                                 
+                                <div class="form-group">
                                     <div class="row">
                                         <div class="text-right">                                           
-                                        <div class="col-md-12">                                                    
-                                            <input type="submit" form="returnform" name="Save" value="Save" class="btn btn-primary">
-                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                        </div>                             
+                                            <div class="col-md-12">                                                    
+                                                <input type="submit" form="returnform" name="Save" value="Save" class="btn btn-primary">
+                                                <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                            </div>                             
+                                        </div>
                                     </div>
-                                    </div>
-
                                 </div>
+
+                            
                                
                               
                             </form>
