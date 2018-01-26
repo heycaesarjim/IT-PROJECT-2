@@ -32,7 +32,6 @@
         <link href="assets/css/tab.css" rel="stylesheet">
 
         <link rel="stylesheet" href="assets/css/bootstrapv3.3.7.css">
-        <link href="assets/css/search.css" rel="stylesheet">
 
     </head>
 
@@ -147,32 +146,53 @@
 
                                                 <div class="row">
 
-                                                    <input type="text" name="search" placeholder="Search">
+                                                    <div class="col-md-4">
+
+                                                        <div class="form-group">
+
+                                                            <label><i class = "ti-search"></i> Search</label>
+                                                            <input type="text" class="form-control border-input" placeholder="Enter name of item">
+
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
 
                                             </form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="text-left">                                               
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                                          <a href = "#edit" data-toggle="modal" class="btn btn-info btn-fill">Edit</button> 
+                                                          </a>
+                                                          <a href = "#addquan" data-toggle="modal" class="btn btn-info btn-fill">Add</button>
+                                                          </a>
+                                                          <a href = "#subtract" data-toggle="modal" class="btn btn-info btn-fill">Subtract</button> 
+                                                          </a>                                                    
+                                                          <a href = "#return" data-toggle="modal" class="btn btn-info btn-fill">Return</button>
+                                                          </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                            <div class = "text-right">
-
-                                                <button type="submit" class="btn btn-info btn-fill btn-wd"><i class = "ti-plus"></i> Add new item</button> <button type="submit" class="btn btn-info btn-fill btn-wd"><i class="ti-minus"></i> Remove item</button>
-
+                                                <div class="col-md-6">
+                                                    <div class = "text-right">
+                                                        <a href = "#addnew" data-toggle="modal">
+                                                            <button type="submit" class="btn btn-info btn-fill btn-wd"><i class = "ti-plus"></i> Add new item</button> 
+                                                        </a>        
+                                                        <a href = "#remove" data-toggle="modal">
+                                                            <button type="submit" class="btn btn-info btn-fill btn-wd"><i class="ti-minus"></i> Remove item</button>
+                                                        </a>
+                                                                                                   
+                                                    </div>
+                                                </div>
+                                          
                                             </div>
 
                                         </div>
 
-                                        <div class="tab">
-
-                                            <button class="tablinks" onclick="openCity(event, 'edit')">Edit</button>
-
-                                            <button class="tablinks" onclick="openCity(event, 'add')">Add</button>
-
-                                            <button class="tablinks" onclick="openCity(event, 'subtract')">Subtract</button>
-
-                                            <button class="tablinks" onclick="openCity(event, 'return')">Return</button>
-
-                                        </div>
-
+                                        
                                     </div>
 
                                     <div class="content table-responsive table-full-width">
@@ -242,7 +262,462 @@
 
                 </div>
 
+             </div>
+
+             <div id="addnew" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+
+                <div class = "modal-dialog">
+
+                    <div class = "modal-content">
+                        <div class = "modal-body">
+
+                            <button class="close" data-dismiss="modal">&times;</button>
+
+                            <h4>Add New Item</h4>
+
+                            <form id="addnewform" action = "" method="post" class="ajax">
+                                
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Description:</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control border-input" form="addnewform">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Quantity in Stock:</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="number" form="addnewform" class="form-control border-input">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>WholeSale price:</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="number" form="addnewform" class="form-control border-input">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Retail price:</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="number" form="addnewform" class="form-control border-input">
+
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="row">
+                                        <div class="text-right">                                           
+                                        <div class="col-md-12">                                                    
+                                            <input type="submit" form="addnewform" name="Save" value="Save" class="btn btn-primary">
+                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>                             
+                                    </div>
+                                    </div>
+
+                                </div>
+                               
+                              
+                            </form>
+
+                        </div>
+
+                    
+
+                    </div>
+
+                 </div>
+
             </div>
+            <div id="addquan" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+
+                <div class = "modal-dialog modal-lg">
+
+                    <div class = "modal-content">
+
+                        <div class = "modal-body">
+
+                            <button class="close" data-dismiss="modal">&times;</button>
+
+                            <h4> Add Quantity</h4>
+
+                            <form action = "" id="addquanform" method="post" class="ajax">
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+
+                                            <label><i class = "ti-search"></i> Search</label>
+                                            <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
+
+                                        </div>
+                                        <div class="content table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>Description</th>
+                                                    <th>Quantity in Stock</th>
+                                                    <th>Quantity</th>
+                                                    <th>WholeSale Price</th>
+                                                    <th>Retail Price</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Item 69</td>
+                                                        <td>50</td>
+                                                        <td><div class="form-group">
+                                                                <input type="number" form="addquanform" class="form-control" id="WholeSale">
+                                                            </div>
+                                                        </td>
+                                                        <td>Php 150.00</td>
+                                                        <td>Php 175.00</td>
+                                                        
+                                                    </tr>
+                                               
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="text-right">                                           
+                                        <div class="col-md-12">                                                    
+                                            <input type="submit" form="addquanform" name="submitedit" class="btn btn-primary">
+                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>                             
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                 </div>
+
+            </div>
+            <div id="edit" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+
+                <div class = "modal-dialog modal-lg">
+
+                    <div class = "modal-content">
+
+                        <div class = "modal-body">
+
+                            <button class="close" data-dismiss="modal">&times;</button>
+
+                            <h4>Edit</h4>
+
+                            <form action = "" id="editform" method="post" class="ajax">
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+
+                                            <label><i class = "ti-search"></i> Search</label>
+                                            <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
+
+                                        </div>
+                                        <div class="content table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>Description</th>
+                                                    <th>Quantity in Stock</th>
+                                                    <th>WholeSale Price</th>
+                                                    <th>Retail Price</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Item 69</td>
+                                                        <td>50</td>
+                                                        <td>                                                         
+                                                            <div class="form-group">
+                                                                <input type="text" form="editform" class="form-control" id="WholeSale">
+                                                            </div>                                                         
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input type="text" form="editform" class="form-control" id="retail">
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                               
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="text-right">                                           
+                                        <div class="col-md-12">                                                    
+                                            <input type="submit" form="editform" name="submitedit" class="btn btn-primary">
+                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>                             
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                 </div>
+
+            </div>
+            <div id="subtract" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+
+                <div class = "modal-dialog modal-lg">
+
+                    <div class = "modal-content">
+
+                        <div class = "modal-body">
+
+                            <button class="close" data-dismiss="modal">&times;</button>
+
+                            <h4> Add Quantity</h4>
+
+                            <form action = "" id="reasonform" method="post" class="ajax">
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+
+                                            <label><i class = "ti-search"></i> Search</label>
+                                            <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
+
+                                        </div>
+                                        <div class="content table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>Description</th>
+                                                    <th>Quantity</th>
+                                                    <th>WholeSale Price</th>
+                                                    <th>Retail Price</th>
+                                                    <th>Reason</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Item 69</td>
+                                                        <td><div class="form-group">
+                                                                <input type="number" form="reasonform" class="form-control" id="WholeSale">
+                                                            </div>
+                                                        </td>
+                                                        <td>Php 150.00</td>
+                                                        <td>Php 175.00</td>
+                                                        <td><div class="form-group">
+                                                                <textarea class="form-control" form="reasonform" rows="4" id="comment"></textarea>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                               
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="text-right">                                           
+                                        <div class="col-md-12">                                                    
+                                            <input type="submit" form="reasonform" name="submitedit" class="btn btn-primary">
+                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>                             
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                 </div>
+
+            </div>
+            <div id="return" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+
+                <div class = "modal-dialog">
+
+                    <div class = "modal-content">
+
+                        <div class = "modal-body">
+
+                            <button class="close" data-dismiss="modal">&times;</button>
+
+                            <h4>Return of Item</h4>
+
+                            <form id="returnform" action = "" method="post" class="ajax">
+                                
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Customer Name:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control border-input" form="returnform" placeholder="Customer Name">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Item Purchased:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                             <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>
+                                             <div class="text-right">
+                                                <button ><i class="ti-plus"></i></button>
+                                             </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Quantity:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="number" form="returnform" class="form-control border-input">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Total price:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="number" form="returnform" class="form-control border-input">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Reason</label>                                            
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Status</label>                                            
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" form="returnform" name="status">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="text-right">                                           
+                                        <div class="col-md-12">                                                    
+                                            <input type="submit" form="returnform" name="Save" value="Save" class="btn btn-primary">
+                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>                             
+                                    </div>
+                                    </div>
+
+                                </div>
+                               
+                              
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                 </div>
+
+            </div>
+            <div id="remove" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+
+                <div class = "modal-dialog modal-lg">
+
+                    <div class = "modal-content">
+
+                        <div class = "modal-body">
+
+                            <button class="close" data-dismiss="modal">&times;</button>
+
+                            <h4>Remove</h4>
+
+                            <form action = "" id="removeform" method="post" class="ajax">
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+
+                                            <label><i class = "ti-search"></i> Search</label>
+                                            <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
+
+                                        </div>
+                                        <div class="content table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>Description</th>
+                                                    <th>Quantity in Stock</th>
+                                                    <th>Quantity</th>
+                                                    <th>WholeSale Price</th>
+                                                    <th>Retail Price</th>
+                                                    <th>Delete</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Item 69</td>
+                                                        <td>50</td>
+                                                        <td><div class="form-group">
+                                                                <input type="number" form="removeform" class="form-control" >
+                                                            </div>
+                                                        </td>
+                                                        <td>Php 150.00</td>
+                                                        <td>Php 175.00</td>
+                                                        <td><button form="removeform"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                                        
+                                                    </tr>
+                                               
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="text-right">                                           
+                                        <div class="col-md-12">                                                    
+                                            <input type="submit" form="removeform" value="Save" class="btn btn-primary">
+                                            <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>                             
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                 </div>
+
+            </div>
+
 
         </div>
 
