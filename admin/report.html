@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="assets/css/bootstrapv3.3.7.css">
 
         <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+        <link href="assets/css/search.css" rel="stylesheet">
     </head>
 
     <body>
@@ -153,42 +153,35 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-md-4">
-
-                                                        <div class="form-group">
-
-                                                            <label><i class = "ti-search"></i> Search</label>
-                                                            <input type="text" class="form-control border-input" placeholder="Enter customer name">
-
-                                                        </div>
-
-                                                    </div>
+                                                    <div class = "col-md-12">
+                                                        <input type="text" name="search" placeholder="Search">
+                                                    </div>  
 
                                                 </div>
 
                                             </form>
-
-                                            <p>Generate report in <button type="submit" class="btn btn-success"><i class = "fa fa-file-excel-o"></i> Excel</button> <button type="submit" class="btn btn-danger"><i class="  fa fa-file-pdf-o"></i> PDF</button> </p>
+                                            <p class="category">Generate Report:</p>
+                                            <button type="submit" class="btn btn-success"><i class = "fa fa-file-excel-o"></i> Excel</button> <button type="submit" class="btn btn-danger"><i class="  fa fa-file-pdf-o"></i> PDF</button>
 
                                             <!-- <div class="tab">
 
-                                              <button class="tablinks" onclick="openCity(event, 'transactions')">Transactions</button>
+<button class="tablinks" onclick="openCity(event, 'transactions')">Transactions</button>
 
-                                              <button class="tablinks" onclick="openCity(event, 'returns')">Returns</button>
+<button class="tablinks" onclick="openCity(event, 'returns')">Returns</button>
 
-                                              <button class="tablinks" onclick="openCity(event, 'addedItems')">Items Added</button>
+<button class="tablinks" onclick="openCity(event, 'addedItems')">Items Added</button>
 
-                                              <button class="tablinks" onclick="openCity(event, 'removedItems')">Removed Items</button>
+<button class="tablinks" onclick="openCity(event, 'removedItems')">Removed Items</button>
 
-                                            </div> -->
+</div> -->
 
                                         </div>
 
                                         <ul class="nav nav-pills">
-                                        <li class="active"><a href="active">Transaction</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Items Added</a></li>
-                                        <li><a href="#">Removed Items</a></li>
+                                            <li class="active"><a href="active">Transaction</a></li>
+                                            <li><a href="#">Returns</a></li>
+                                            <li><a href="#">Items Added</a></li>
+                                            <li><a href="#">Removed Items</a></li>
                                         </ul>
 
                                     </div>
