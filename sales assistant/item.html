@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
-
     <head>
-
         <meta charset="utf-8" />
         <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
         <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
@@ -15,9 +13,9 @@
 
 
         <!-- Bootstrap core CSS     -->
-        <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" /> -->
+        <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
-        <!-- Animation library for notifications   -->
+<!-- Animation library for notifications   -->
         <link href="assets/css/animate.min.css" rel="stylesheet"/>
 
         <!--  Paper Dashboard core CSS    -->
@@ -32,18 +30,16 @@
         <link href="assets/css/tab.css" rel="stylesheet">
 
         <link rel="stylesheet" href="assets/css/bootstrapv3.3.7.css">
+        <link href="assets/css/themify-icons.css" rel="stylesheet">
         <link href="assets/css/search.css" rel="stylesheet">
 
     </head>
-
     <body>
 
         <div class="wrapper">
-
             <div class="sidebar" data-background-color="white" data-active-color="danger">
 
                 <div class="sidebar-wrapper">
-
                     <div class="logo">
                         <a href="dashboard.html" class="simple-text">
                             JERNIXON MOTORPARTS AND ACCESSORIES
@@ -51,48 +47,25 @@
                     </div>
 
                     <ul class="nav">
-
                         <li>
                             <a href="dashboard.html">
                                 <i class="ti-panel"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-
-                        <li>
-                            <a href="report.html">
-                                <i class="ti-clipboard"></i>
-                                <p>Reports</p>
-                            </a>
-                        </li>
-
                         <li class="active">
                             <a href="item.html">
                                 <i class="ti-view-list-alt"></i>
-                                <p>Items</p>
+                                <p>List of Items</p>
                             </a>
                         </li>
-
-                        <li>
-                            <a href="employee.html">
-                                <i class="ti-user"></i>
-                                <p>Employees</p>
-                            </a>
-                        </li>
-
                     </ul>
-
                 </div>
-
-            </div> 
-            <!-- end os side navigation -->
+            </div>
 
             <div class="main-panel">
-
                 <nav class="navbar navbar-default">
-
                     <div class="container-fluid">
-
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle">
                                 <span class="sr-only">Toggle navigation</span>
@@ -102,15 +75,13 @@
                             </button>
                             <a class="navbar-brand" href="#"><i class="ti-view-list-alt"> </i>Items</a>
                         </div>
-
                         <div class="collapse navbar-collapse">
-
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="ti-user"></i>
                                         <p class="notification"></p>
-                                        <p>Admin</p>
+                                        <p>Sales Assistant (Name)</p>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -121,133 +92,101 @@
                                     </ul>
                                 </li>
                             </ul>
-
                         </div>
-
                     </div>
-
                 </nav>
 
 
                 <div class="content">
-
                     <div class="container-fluid">
-
                         <div class="row">
-
                             <div class="col-md-12">
-
                                 <div class="card">
-
                                     <div class="header">
-
-                                        <div class = "content">
-
-                                            <form class = "form-inline">
-
-                                                <div class="row">
-
-                                                    <input type="text" name="search" placeholder="Search">
-
-                                                </div>
-
-                                            </form>
-
-                                            <div class = "text-right">
-
-                                                <button type="submit" class="btn btn-info btn-fill btn-wd"><i class = "ti-plus"></i> Add new item</button> <button type="submit" class="btn btn-info btn-fill btn-wd"><i class="ti-minus"></i> Remove item</button>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="tab">
-
-                                            <button class="tablinks" onclick="openCity(event, 'edit')">Edit</button>
-
-                                            <button class="tablinks" onclick="openCity(event, 'add')">Add</button>
-
-                                            <button class="tablinks" onclick="openCity(event, 'subtract')">Subtract</button>
-
-                                            <button class="tablinks" onclick="openCity(event, 'return')">Return</button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="content table-responsive table-full-width">
-                                        <table class="table table-striped">
+                                            <input type="text" name="search" placeholder="Search"> 
+                                            <a href = "#view" data-toggle="modal">
+                                                <button type="button" class="btn btn-success pull-right ">Add to Cart <i class = "ti-shopping-cart">  </i></button>
+                                            </a>
+                                        <br>
+                                        <br>
+                                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Salary</th>
-                                                <th>Country</th>
-                                                <th>City</th>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Position</th>
+                                                    <th>Office</th>
+                                                    <th>Extn.</th>
+                                                    <th>Start date</th>
+                                                    <th>Salary</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Eve</td>
+                                                    <td>Jackson</td>
+                                                    <td>94</td>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Doe</td>
+                                                    <td>80</td>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Eve</td>
+                                                    <td>Jackson</td>
+                                                    <td>94</td>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Doe</td>
+                                                    <td>80</td>
+                                                    <td>Jill</td>
+                                                    <td>Smith</td>
+                                                    <td>50</td>
+                                                </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>$36,738</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr>
-                                            </tbody>
                                         </table>
-
                                     </div>
-
+                                    <br>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </body>
+    <footer class="footer">
+        <div class="container-fluid">
 
+            <div class="copyright pull-center">
+               Copyright &copy;  Jernixon Motorparts and Accessories <script>document.write(new Date().getFullYear())</script>
+            </div>
+        </div>
+    </footer>
     <!--   Core JS Files   -->
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -267,4 +206,6 @@
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
     <script src="assets/js/paper-dashboard.js"></script>
 
+    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/js/demo.js"></script>
 </html>
