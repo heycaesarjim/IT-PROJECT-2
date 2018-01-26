@@ -153,7 +153,7 @@
                                                 <div class="row">
 
                                                     <p class = "col-md-12">
-                                                        <input type="text" name="search" placeholder="Enter date" class = "form-control border-input" >
+                                                        <input type="text" name="search" placeholder="Enter date (MM-DD-YYYY)" class = "form-control border-input" >
                                                     </p>  
 
                                                 </div>
@@ -163,7 +163,7 @@
 
                                                 <label class="category">Generate Report:</label>
                                                 <button type="submit" class="btn btn-success"><i class = "fa fa-file-excel-o"></i> Excel</button> <button type="submit" class="btn btn-danger"><i class="  fa fa-file-pdf-o"></i> PDF</button>
-                                            
+
                                             </p>
 
                                             <!-- <div class="tab">
@@ -181,72 +181,183 @@
                                         </div>
 
                                         <ul class="nav nav-pills">
-                                            <li class="active"><a href="active">Transaction</a></li>
-                                            <li><a href="#">Returns</a></li>
-                                            <li><a href="#">Items Added</a></li>
-                                            <li><a href="#">Removed Items</a></li>
+                                            <li class="active"><a href="#transaction" data-toggle="tab">Transaction</a></li>
+                                            <li><a href="#returns" data-toggle="tab">Returns</a></li>
+                                            <li><a href="#addedItems" data-toggle="tab">Items Added</a></li>
+                                            <li><a href="#removedItems" data-toggle="tab">Removed Items</a></li>
                                         </ul>
 
                                     </div>
 
-                                    <!-- <div id = "transactions" class = "tabcontent"> -->
-                                    <div class="content table-responsive table-full-width">
+                                    <div class= "tab-content">
+
+                                    <!-- start transaction content -->
+
+                                    <div class = "tab-pane fade in active" id="transaction">
+
+                                        <div class="content table-responsive table-full-width">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>Item Purchased</th>
+                                                    <th>Quantity</th>
+                                                    <th>Wholesale Price</th>
+                                                    <th>Retail Price</th>
+                                                    <th>Total Price</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Dakota Rice</td>
+                                                        <td>1</td>
+                                                        <td>$36,738</td>
+                                                        <td>$37,738</td>
+                                                        <td>$37,738</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Minerva Hooper</td>
+                                                        <td>2</td>
+                                                        <td>$23,789</td>
+                                                        <td>$24,789</td>
+                                                        <td>$24,789</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sage Rodriguez</td>
+                                                        <td>3</td>
+                                                        <td>$56,142</td>
+                                                        <td>$56,142</td>
+                                                        <td>$56,142</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                    </div> <!-- end transaction -->
+
+                                    <!-- start returns -->
+
+                                    <div id="returns" class="tab-pane fade in">
+                                        <div class="content table-responsive table-full-width">
+
                                         <table class="table table-striped">
                                             <thead>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Salary</th>
-                                                <th>Country</th>
-                                                <th>City</th>
+                                                <th>Description</th>
+                                                <th>Quantity</th>
+                                                <th>Wholesale Price</th>
+                                                <th>Retail Price</th>
+                                                <th>Total Price</th>
+                                                <th>Reason</th>
+                                                <th>Status</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
                                                     <td>Dakota Rice</td>
+                                                    <td>1</td>
                                                     <td>$36,738</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
+                                                    <td>$37,738</td>
+                                                    <td>$37,738</td>
+                                                    <td>Damaged</td>
+                                                    <td>Deffective not sellable</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
                                                     <td>Minerva Hooper</td>
+                                                    <td>2</td>
                                                     <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
+                                                    <td>$24,789</td>
+                                                    <td>$24,789</td>
+                                                    <td>Damaged</td>
+                                                    <td>Deffective not sellable</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>3</td>
                                                     <td>Sage Rodriguez</td>
+                                                    <td>3</td>
                                                     <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
+                                                    <td>$56,142</td>
+                                                    <td>$56,142</td>
+                                                    <td>Incorrect Size</td>
+                                                    <td>Sellable</td>
                                                 </tr>
                                             </tbody>
                                         </table>
 
-                                    </div>
-                                    <!-- </div> -->
+                                        </div>
+
+                                    </div> <!-- end returns -->
+
+                                    <!-- start added items -->
+
+                                    <div id="addedItems" class="tab-pane fade in">
+                                        <div class="content table-responsive table-full-width">
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Description</th>
+                                                <th>Wholesale Price</th>
+                                                <th>Retail Price</th>
+                                                <th>Quantity Added</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dakota Rice</td>
+                                                    <td>1</td>
+                                                    <td>$36,738</td>
+                                                    <td>$37,738</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Minerva Hooper</td>
+                                                    <td>2</td>
+                                                    <td>$23,789</td>
+                                                    <td>$24,789</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sage Rodriguez</td>
+                                                    <td>3</td>
+                                                    <td>$56,142</td>
+                                                    <td>$56,142</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        </div>
+
+                                    </div> <!-- end -->
+
+                                    <!-- start remove items -->
+
+                                    <div id="removedItems" class="tab-pane fade in">
+                                        <div class="content table-responsive table-full-width">
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Description</th>
+                                                <th>Wholesale Price</th>
+                                                <th>Retail Price</th>
+                                                <th>Quantity Subtracted</th>
+                                                <th>Reason</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dakota Rice</td>
+                                                    <td>1</td>
+                                                    <td>$36,738</td>
+                                                    <td>5</td>
+                                                    <td>The item was damaged</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Minerva Hooper</td>
+                                                    <td>2</td>
+                                                    <td>$23,789</td>
+                                                    <td>1</td>
+                                                    <td>The item was sold</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        </div>
+
+                                    </div> <!-- end -->
+
+                                </div>
+
                                 </div>
 
                             </div>
