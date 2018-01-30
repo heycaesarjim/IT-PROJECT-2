@@ -2,87 +2,66 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{asset('css/app.css')}}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        {{--  <meta name="viewport" content="width=device-width, initial-scale=1">  --}}
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/logo.png')}}">
 
+        {{--  <link rel="stylesheet" href="{{asset('css/app.css')}}">  --}}
+        <!-- Animation library for notifications   -->
+        <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
+        <!--  Paper Dashboard core CSS    -->
+        <link href="{{asset('assets/css/paper-dashboard.css')}}" rel="stylesheet"/>
+        <!--  Fonts and icons     -->
+        <link href="{{asset('css/app.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/css/fonts.css')}}" rel='stylesheet' type='text/css'>
+        <link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">
+        <!-- tab style -->
+        <link href="{{asset('assets/css/tab.css')}}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrapv3.3.7.css')}}">
         <title>{{config('app.name')}}</title>
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        {{--  <script src="{{ asset('js/app.js') }}"></script>  --}}
     </head>
     
     <body>
         
-            <div id="wrapper">  
-                <!-- Navigation -->
-                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        {{--  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>  --}}
-                        <a class="navbar-brand" href="/report">Jernixon - Inventory System</a>
-                    </div>
-                    <!-- Top Menu Items -->
-                    
-                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                    <div class="collapse navbar-collapse navbar-ex1-collapse">
-                        <ul class="nav navbar-nav side-nav">
-                            <li class="active">
-                                <a href="dashboard"><i class="fa fa-fw fa-dashboard" aria-hidden="true"></i> Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="reports"><i class="fa fa-pie-chart"></i>Reports</a>
-                            </li>
-                            <li>
-                                <a href="items"><i class="glyphicon glyphicon-list"></i>Items</a>
-                            </li>
-                            <li>
-                                <a href="employees"><i class="glyphicon glyphicon-list"></i>Employees</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </nav>
-                    
-                <div id="page-wrapper">
-                    <div class="container-fluid">
-                            <!-- Page Heading -->
-                            @yield('content')
+        <div class="wrapper">  
+                <div class="sidebar" data-background-color="white" data-active-color="danger">
+                    <div class="sidebar-wrapper">
+                        <div class="logo">
+                            <a href="dashboard.html" class="simple-text">
+                                JERNIXON MOTORPARTS AND ACCESSORIES
+                            </a>
+                        </div>
+                        <ul class="nav">
                             
-                            @yield('left')
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h1 class="page-header">
-                                        {{--  <button class="btn btn-default btn-lg btn-success" id="add-stock" onclick="clearValuesIn()" data-toggle="modal" data-target="#modal-new-stock">IN
-                                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                                        </button>
-                        
-                                        <button class="btn btn-default btn-lg btn-success" id="add-request" onclick="clearValuesOut()" data-toggle="modal" data-target="#modal-new-request">OUT
-                                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                                        </button>
-                                                    
-                                        <button class="btn btn-default btn-lg btn-info" id="add-stock" data-toggle="modal" data-target="#modal-new-item">Add Item
-                                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                                        </button>	
-                                                    
-                                        <a href='confirmation.php'><button style="float:right" class="btn btn-default btn-lg btn-danger" id="reset">RESET
-                                            <i class="fa fa-cog fa-spin"></i>
-                                        </button></a>  --}}
-   
-                                    </h1>
-                                </div>
-                            </div>
+                           <li @yield('dashboard_link')>
+                                <a href="dashboard"><i class="ti-panel"></i><p>Dashboard</p></a>
+                            </li>                        
+                            <li  @yield('reports_link') >
+                                <a href="reports"><i class="ti-clipboard"></i><p>Reports</p></a>
+                            </li>
+                            <li  @yield('items_link') >
+                                <a href="items"><i class="ti-clipboard"></i><p>Items</p></a>
+                            </li>
+                            <li @yield('employees_link')>
+                                <a href="employees"><i class="ti-user"></i><p>Employees</p></a>
+                            </li>
+                        </ul>
+    
                     </div>
-                </div>
-                       
-            </div>
+    
+                </div> 
 
-
- 
-
+                <div class="main-panel">
+                    @yield('right')
+                
+                </div> 
+         </div>
     </body>
+    @yield('modals')
+    @yield('js_link')
 </html>
