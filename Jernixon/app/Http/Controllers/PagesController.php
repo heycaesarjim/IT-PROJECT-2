@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class PagesController extends Controller
 {
@@ -12,6 +13,8 @@ class PagesController extends Controller
     }
 
     public function dashboard(){
+        // $products = Product::all();
+        // return view('pages.dashboard')->with('products',$products);
         return view('pages.dashboard');
     }
 
