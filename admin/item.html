@@ -160,18 +160,19 @@
                                             </form>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="text-left">                                               
-                                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                                          <a href = "#edit" data-toggle="modal" class="btn btn-info btn-fill" >Edit </a>
-                                                          
-                                                          <a href = "#addquan" data-toggle="modal"  class="btn btn-info btn-fill">Add</a>
-                                                          
-                                                          <a href = "#subtract" data-toggle="modal" class="btn btn-info btn-fill">Subtract </a>
-                                                                                                        
-                                                          <a href = "#return" data-toggle="modal"  class="btn btn-info btn-fill">Return</a>
-                                                          
-                                                        </div>
-                                                    </div>
+                               
+                                                    <ul class="nav nav-pills">
+                                                      <li >
+                                                         <a href = "#addquan" data-toggle="modal"   >Add</a>
+                                                      </li>
+                                                      <li >
+                                                        <a href = "#subtract" data-toggle="modal" >Subtract </a>
+                                                      </li>
+                                                      <li >
+                                                        <a href = "#return" data-toggle="modal"  >Return</a>
+                                                      </li>                                                      
+                                                    </ul>
+                                                    
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -180,7 +181,7 @@
                                                             <button type="submit" class="btn btn-info btn-fill btn-wd btn-success"><i class = "ti-plus"></i> Add new item</button> 
                                                         </a>        
                                                         <a href = "#remove" data-toggle="modal">
-                                                            <button type="submit" class="btn btn-info btn-fill btn-wd btn-danger"><i class="ti-minus"></i> Remove item</button>
+                                                            <button type="submit" class="btn btn-info btn-fill btn-wd btn-danger"><i class="ti-minus"></i> Remove time</button>
                                                         </a>
                                                                                                    
                                                     </div>
@@ -201,6 +202,7 @@
                                                 <th>WholeSale Price</th>
                                                 <th>Retail Price</th>
                                                 <th>Total Price</th>
+                                                <th></th>
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -209,6 +211,7 @@
                                                     <td>Php 100.00</td>
                                                     <td>Php 120.00</td>
                                                     <td>Php 60,000.00</td>
+                                                    <td><a href = "#edit" data-toggle="modal" class="btn btn-info btn-fill" >Edit </a> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sticker</td>
@@ -216,6 +219,7 @@
                                                     <td>Php 70.00</td>
                                                     <td>Php 90.00</td>
                                                     <td>Php 54,000.00</td>
+                                                    <td><a href = "#edit" data-toggle="modal" class="btn btn-info btn-fill" >Edit </a> </td>
                                                 </tr>
                                                 
                                             </tbody>
@@ -304,7 +308,7 @@
                                     </div>
 
                                 </div>
-                               
+                              
                               
                             </form>
 
