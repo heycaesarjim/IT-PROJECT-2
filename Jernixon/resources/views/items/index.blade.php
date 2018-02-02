@@ -57,7 +57,6 @@
                                     <div class="col-md-6">
                                         <div class="text-left">                                               
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                              <a href = "#edit" data-toggle="modal" class="btn btn-info btn-fill" >Edit </a>
                                               <a href = "#addquan" data-toggle="modal"  class="btn btn-info btn-fill">Add</a>
                                               <a href = "#subtract" data-toggle="modal" class="btn btn-info btn-fill">Subtract </a>                                     
                                               <a href = "#return" data-toggle="modal"  class="btn btn-info btn-fill">Return</a>
@@ -88,155 +87,152 @@
                 </div>
             </div>
         </div>
-    </div>
         @if(count($products) > 1)
-                @foreach ($products as $product)
-                        <div class="well">
-                                <h3>{{$product->description}}</h3>
-                        </div>
-                @endforeach
-        @else
-                <h5>No items</h5>
-        @endif
+        @foreach ($products as $product)
+                <div class="well">
+                        <h3>{{$product->description}}</h3>
+                </div>
+        @endforeach
+@else
+        <h5>No items</h5>
+@endif
+    </div>
+
 @endsection
 
 @section('modals')
-<div id="addnew" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-        <div class = "modal-dialog">
-            <div class = "modal-content">
-                <div class = "modal-body">
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <h4>Add New Item</h4>
-                    <form id="addnewform" action = "" method="post" class="ajax">
-                        <div class="form-group">
+    <div id="addnew" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+            <div class = "modal-dialog">
+                <div class = "modal-content">
+                    <div class = "modal-body">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4>Add New Item</h4>
+                        {!! Form::open(['action'=>'ItemsController@store', 'method'=>'post']) !!}
+                            <div class="form-group">
+                                {{Form::label('description', 'Description')}}
+                                {{Form::text('description','',['class'=>'form-control','placeholder'=>'Description'])}}
+                                {{Form::label('Quantity in stock', 'Quantity in stock')}}
+                                {{Form::number('Quantity in stock',['class'=>'form-control','placeholder'=>'quantity','min'=>'1'])}}
+                                {{Form::label('Whole Sale Price', 'Whole Sale Price')}}
+                                {{Form::number('Whole Sale Price',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1'])}}
+                                {{Form::label('Retail Price', 'Retail Price')}}
+                                {{Form::text('Retail Price','',['class'=>'form-control','placeholder'=>'Retail Price'])}}
+                              {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
+                            </div>
                             
-                            <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>Description:</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control border-input" form="addnewform">
+                        {!!Form::close()!!}
 
+                        {{--  <form id="addnewform" action = "" method="post" class="ajax">
+                            <div class="form-group">
+                                
+                                <div class="row">
+                                    <div class="col-md-3 text-right">
+                                        <label>Description:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control border-input" form="addnewform">
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>Quantity in Stock:</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="number" form="addnewform" class="form-control border-input">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 text-right">
+                                        <label>Quantity in Stock:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" form="addnewform" class="form-control border-input">
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>WholeSale price:</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="number" form="addnewform" class="form-control border-input">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 text-right">
+                                        <label>WholeSale price:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" form="addnewform" class="form-control border-input">
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>Retail price:</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="number" form="addnewform" class="form-control border-input">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 text-right">
+                                        <label>Retail price:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" form="addnewform" class="form-control border-input">
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="text-right">                                           
+                                    <div class="col-md-12">                                                    
+                                        <input type="submit" form="addnewform" name="Save" value="Save" class="btn btn-primary">
+                                        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    </div>                             
+                                </div>
+                                </div>
+                            </div>
+                        </form>  --}}
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    <div id="addquan" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+            <div class = "modal-dialog modal-lg">
+                <div class = "modal-content">
+                    <div class = "modal-body">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4> Add Quantity</h4>
+                        <form action = "" id="addquanform" method="post" class="ajax">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label><i class = "ti-search"></i> Search</label>
+                                        <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
+                                    </div>
+                                    <div class="content table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th>Description</th>
+                                                <th>Quantity in Stock</th>
+                                                <th>Quantity</th>
+                                                <th>WholeSale Price</th>
+                                                <th>Retail Price</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Item 69</td>
+                                                    <td>50</td>
+                                                    <td><div class="form-group">
+                                                            <input type="number" form="addquanform" class="form-control" id="WholeSale">
+                                                        </div>
+                                                    </td>
+                                                    <td>Php 150.00</td>
+                                                    <td>Php 175.00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <div class="text-right">                                           
-                                <div class="col-md-12">                                                    
-                                    <input type="submit" form="addnewform" name="Save" value="Save" class="btn btn-primary">
-                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>                             
+                                    <div class="col-md-12">                                                    
+                                        <input type="submit" form="addquanform" name="submitedit" class="btn btn-primary">
+                                        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    </div>                             
+                                </div>
                             </div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-         </div>
-
-</div>
-<div id="addquan" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-
-        <div class = "modal-dialog modal-lg">
-
-            <div class = "modal-content">
-
-                <div class = "modal-body">
-
-                    <button class="close" data-dismiss="modal">&times;</button>
-
-                    <h4> Add Quantity</h4>
-
-                    <form action = "" id="addquanform" method="post" class="ajax">
-
-                        <div class="row">
-
-                            <div class="col-md-12">
-
-                                <div class="form-group">
-
-                                    <label><i class = "ti-search"></i> Search</label>
-                                    <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
-
-                                </div>
-                                <div class="content table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>Description</th>
-                                            <th>Quantity in Stock</th>
-                                            <th>Quantity</th>
-                                            <th>WholeSale Price</th>
-                                            <th>Retail Price</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Item 69</td>
-                                                <td>50</td>
-                                                <td><div class="form-group">
-                                                        <input type="number" form="addquanform" class="form-control" id="WholeSale">
-                                                    </div>
-                                                </td>
-                                                <td>Php 150.00</td>
-                                                <td>Php 175.00</td>
-                                                
-                                            </tr>
-                                       
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                               
-                            </div>
-                            <div class="text-right">                                           
-                                <div class="col-md-12">                                                    
-                                    <input type="submit" form="addquanform" name="submitedit" class="btn btn-primary">
-                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>                             
-                            </div>
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-         </div>
 
     </div>
     <div id="edit" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">

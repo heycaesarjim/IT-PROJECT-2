@@ -36,7 +36,10 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'description' => 'required',
+            
+        ]);
     }
 
     /**
