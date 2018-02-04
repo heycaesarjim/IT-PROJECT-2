@@ -36,10 +36,14 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'description' => 'required',
-            
-        ]);
+        $item = new Product;
+        $item->description = $request->input('description');
+        $item->quantityInStock = $request->input('quantityInStock');
+        $item->wholeSalePrice = $request->input('wholeSalePrice');
+        $item->retailPrice = $request->input('retailPrice');
+        $item->save();
+        return "success";
+       // return redirect('/items')->with('success','Success adding item');
     }
 
     /**

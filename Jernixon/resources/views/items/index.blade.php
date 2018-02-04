@@ -109,81 +109,63 @@
                         <h4>Add New Item</h4>
                         {!! Form::open(['action'=>'ItemsController@store', 'method'=>'post']) !!}
                             <div class="form-group">
-                                {{Form::label('description', 'Description')}}
-                                {{Form::text('description','',['class'=>'form-control','placeholder'=>'Description'])}}
-                                {{Form::label('Quantity in stock', 'Quantity in stock')}}
-                                {{Form::number('Quantity in stock',['class'=>'form-control','placeholder'=>'quantity','min'=>'1'])}}
-                                {{Form::label('Whole Sale Price', 'Whole Sale Price')}}
-                                {{Form::number('Whole Sale Price',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1'])}}
-                                {{Form::label('Retail Price', 'Retail Price')}}
-                                {{Form::text('Retail Price','',['class'=>'form-control','placeholder'=>'Retail Price'])}}
-                              {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
-                            </div>
-                            
-                        {!!Form::close()!!}
-
-                        {{--  <form id="addnewform" action = "" method="post" class="ajax">
-                            <div class="form-group">
-                                
                                 <div class="row">
                                     <div class="col-md-3 text-right">
-                                        <label>Description:</label>
+                                        {{Form::label('description', 'Description:')}}
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control border-input" form="addnewform">
-
+                                        {{Form::text('description','',['class'=>'form-control','placeholder'=>'Description','required'])}}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                             </div>
+
+                            <div class="form-group">                                
                                 <div class="row">
                                     <div class="col-md-3 text-right">
-                                        <label>Quantity in Stock:</label>
+                                        {{Form::label('Quantity in stock:')}}
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="number" form="addnewform" class="form-control border-input">
-
+                                        {{ Form::number('quantityInStock','',['class'=>'form-control','placeholder'=>'quantity','min'=>'1','required']) }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group">    
                                 <div class="row">
                                     <div class="col-md-3 text-right">
-                                        <label>WholeSale price:</label>
+                                        {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="number" form="addnewform" class="form-control border-input">
+                                        {{Form::number('wholeSalePrice','   ',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1','step'=>'.00','required'])}}
+                                    </div>
+                                  </div>
+                            </div>
 
+                            <div class="form-group">   
+                                <div class="row">
+                                    <div class="col-md-3 text-right">                                                             
+                                        {{Form::label('Retail Price', 'Retail Price:')}}
+                                    </div>
+                                    <div class="col-md-9">                                    
+                                         {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'Retail Price','required'])}}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3 text-right">
-                                        <label>Retail price:</label>
+                                    <div class="row">
+                                        <div class="text-right">                                           
+                                            <div class="col-md-12">   
+                                                {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
+                                                <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-9">
-                                        <input type="number" form="addnewform" class="form-control border-input">
+                            </div>
+                        {!! Form::close() !!}
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="text-right">                                           
-                                    <div class="col-md-12">                                                    
-                                        <input type="submit" form="addnewform" name="Save" value="Save" class="btn btn-primary">
-                                        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                    </div>                             
-                                </div>
-                                </div>
-                            </div>
-                        </form>  --}}
                     </div>
                 </div>
-
             </div>
-
+ 
     </div>
     <div id="addquan" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
             <div class = "modal-dialog modal-lg">
