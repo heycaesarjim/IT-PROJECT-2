@@ -66,7 +66,7 @@
 
                                     <div class="col-md-6">
                                         <div class = "text-right">
-                                            <a href = "#addnew" data-toggle="modal">
+                                            <a href = "#addnew" data-toggle="modal" >
                                                 <button type="submit" class="btn btn-info btn-fill btn-wd btn-success"><i class = "ti-plus"></i> Add new item</button> 
                                             </a>        
                                             <a href = "#remove" data-toggle="modal">
@@ -75,29 +75,63 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{--  <div class="row">
+                                    <div id="belowAddNewItem" class="col-lg-10" style="display:none">
+
+                                    </div>      
+                                </div>  --}}
                             </div>    
                         </div>
 <br>
-                        <ul class="list-group-item-danger">
-                                <li>Add datatables</li>
-                        </ul> 
+
+
+
+                        <table id="tableItems" class="table table-hover table-condensed" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>created_at</th>
+                                    <th>updated_at</th>
+                                </tr>
+                            </thead>
+                          </table>
 
 
                     </div>
                 </div>
             </div>
         </div>
-        @if(count($products) > 1)
+        {{--  @if(count($products) > 1)
         @foreach ($products as $product)
                 <div class="well">
                         <h3>{{$product->description}}</h3>
                 </div>
         @endforeach
-@else
-        <h5>No items</h5>
-@endif
+        @else
+                <h5>No items</h5>
+        @endif  --}}
     </div>
 
+@endsection
+
+@section('jqueryScript')
+    <script type="text/javascript">
+        $(document).ready(function() {
+             $('#tableItems').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax":  "{{ route('items.getItems') }}",
+
+                "columns": [
+                    {data: 'description', name: 'description'},
+                    {data: 'price', name: 'price'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'updated_at', name: 'updated_at'}
+                ]
+            });
+        });
+    </script>
 @endsection
 
 @section('modals')
@@ -107,61 +141,61 @@
                     <div class = "modal-body">
                         <button class="close" data-dismiss="modal">&times;</button>
                         <h4>Add New Item</h4>
-                        {!! Form::open(['action'=>'ItemsController@store', 'method'=>'post']) !!}
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3 text-right">
-                                        {{Form::label('description', 'Description:')}}
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{Form::text('description','',['class'=>'form-control','placeholder'=>'Description','required'])}}
-                                    </div>
-                                </div>
-                             </div>
-
-                            <div class="form-group">                                
-                                <div class="row">
-                                    <div class="col-md-3 text-right">
-                                        {{Form::label('Quantity in stock:')}}
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{ Form::number('quantityInStock','',['class'=>'form-control','placeholder'=>'quantity','min'=>'1','required']) }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">    
-                                <div class="row">
-                                    <div class="col-md-3 text-right">
-                                        {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{Form::number('wholeSalePrice','   ',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1','step'=>'.00','required'])}}
-                                    </div>
-                                  </div>
-                            </div>
-
-                            <div class="form-group">   
-                                <div class="row">
-                                    <div class="col-md-3 text-right">                                                             
-                                        {{Form::label('Retail Price', 'Retail Price:')}}
-                                    </div>
-                                    <div class="col-md-9">                                    
-                                         {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'Retail Price','required'])}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
+                            {!! Form::open(['action'=>'ItemsController@store', 'method'=>'post']) !!}
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="text-right">                                           
-                                            <div class="col-md-12">   
-                                                {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
-                                                <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                            </div>
+                                        <div class="col-md-3 text-right">
+                                            {{Form::label('description', 'Description:')}}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{Form::text('description','',['class'=>'form-control','placeholder'=>'Description'])}}
                                         </div>
                                     </div>
-                            </div>
-                        {!! Form::close() !!}
+                                </div>
 
+                                <div class="form-group">                                
+                                    <div class="row">
+                                        <div class="col-md-3 text-right">
+                                            {{Form::label('Quantity in stock:')}}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ Form::number('quantityInStock','',['class'=>'form-control','placeholder'=>'quantity','min'=>'1']) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">    
+                                    <div class="row">
+                                        <div class="col-md-3 text-right">
+                                            {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{Form::number('wholeSalePrice','',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1'])}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">   
+                                    <div class="row">
+                                        <div class="col-md-3 text-right">                                                             
+                                            {{Form::label('Retail Price', 'Retail Price:')}}
+                                        </div>
+                                        <div class="col-md-9">                                    
+                                            {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'Retail Price'])}}
+                                        </div>
+                                    </div>
+                                </div>
+                                @include('inc.messages')
+                                <div class="form-group">
+                                        <div class="row">
+                                            <div class="text-right">                                           
+                                                <div class="col-md-12">   
+                                                    {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
+                                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                 </div>
+                             {!! Form::close() !!}
                     </div>
                 </div>
             </div>
@@ -547,6 +581,9 @@
 
 @section('js_link')
       <!--   Core JS Files   -->
+   
       <script src="{{asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
       <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+      <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+
 @endsection

@@ -15,8 +15,15 @@ Route::get('/', 'PagesController@index');
 Route::get('/dashboard', 'PagesController@dashboard');
 Route::get('/employees', 'PagesController@employees');
 
+Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems');
 Route::resource('items','ItemsController');
 Route::resource('reports', 'ReportsController');
 
 //Route::get('/items', 'ItemsController@index');
 //Route::get('/reports', 'ReportsController@index');
+
+//Datatables
+// Display view
+// Route::get('items', 'ItemsController@index');
+// Get Data
+// Route::get('items/getdata', 'ItemsController@getPosts')->name('datatable/getdata');

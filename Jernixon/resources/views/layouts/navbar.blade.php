@@ -22,12 +22,23 @@
 
         <link rel="stylesheet" href="{{asset('assets/css/bootstrapv3.3.7.css')}}">
         <title>{{config('app.name')}}</title>
-
+        <script src="{{asset('assets/js/jquery.js')}}"></script>
+        
         {{--  <script src="{{ asset('js/app.js') }}"></script>  --}}
+        
     </head>
     
     <body>
-        
+        {{--  <script>
+            $(document).ready(function(){
+                $("#addNewItemButton").click(function(){
+                    $("#belowAddNewItem").css("display:block");
+                    $("#belowAddNewItem").slideDown("slow");
+
+                });
+            });
+        </script>  --}}
+
         <div class="wrapper">  
                 <div class="sidebar" data-background-color="white" data-active-color="danger">
                     <div class="sidebar-wrapper">
@@ -61,7 +72,10 @@
                 
                 </div> 
          </div>
+
+    @yield('jqueryScript')
     </body>
+    
     @yield('modals')
     @yield('js_link')
 </html>
