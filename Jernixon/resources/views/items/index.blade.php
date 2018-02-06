@@ -4,6 +4,53 @@
        class="active"
 @endsection
 
+@section('headScript')
+    <script>
+		function searchItem() {
+
+		  // Declare variables
+		  var input, filter, table, tr, td, i;
+		  input = document.getElementById("inputItem");
+		  filter = input.value.toUpperCase();
+          table = document.getElementById("itemsTable");
+          tr = table.getElementsByTagName("tr");
+                // Loop through all table rows, and hide those who don't match the search query
+                for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    } else {
+                    tr[i].style.display = "none";
+                    }
+                }
+                }
+        
+
+        }
+        function searchItem2(){
+            $.ajax({
+                method: 'get',
+                url: 'items/' + document.getElementById("inputItem").value,
+                dataType: "json",
+                success: function(data){
+                    
+                    $("#itemsTable tr").remove();
+                    var result = "";
+                    for(var i=0; i < data.length; i++){
+                        //alert(data[i].description);
+                        var thatTable = document.getElementById("itemsTable");
+                        var newRow = thatTable.insertRow(-1);
+                        var newCell = newRow.insertCell(-1);
+                        newCell.innerHTML = "<th style='background-color:grey;' >" +data[i].description+ "</th>";
+                    }
+                  
+                }
+            });
+
+        }
+    </script>
+@endsection
 @section('right')
         <i><p style="color:red;font-size:20px">Items under construction!</p></i>
 
@@ -55,16 +102,20 @@
                                 </form>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="text-left">                                               
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                              <a href = "#addquan" data-toggle="modal"  class="btn btn-info btn-fill">Add</a>
-                                              <a href = "#subtract" data-toggle="modal" class="btn btn-info btn-fill">Subtract </a>                                     
-                                              <a href = "#return" data-toggle="modal"  class="btn btn-info btn-fill">Return</a>
-                                            </div>
-                                        </div>
+                                            <ul class="nav nav-pills">
+                                                    <li >
+                                                       <a href = "#addquan" data-toggle="modal"   >Add</a>
+                                                    </li>
+                                                    <li >
+                                                      <a href = "#subtract" data-toggle="modal" >Subtract </a>
+                                                    </li>
+                                                    <li >
+                                                      <a href = "#return" data-toggle="modal"  >Return</a>
+                                                    </li>                                                      
+                                            </ul>
                                     </div>
-
-                                    <div class="col-md-6">
+                                          
+                                    {{--  <div class="col-md-6">  --}}
                                         <div class = "text-right">
                                             <a href = "#addnew" data-toggle="modal" >
                                                 <button type="submit" class="btn btn-info btn-fill btn-wd btn-success"><i class = "ti-plus"></i> Add new item</button> 
@@ -80,22 +131,22 @@
 
                                     </div>      
                                 </div>  --}}
+                                <table id="tableItems" class="table table-hover table-condensed" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>created_at</th>
+                                            <th>updated_at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                  </table>
                             </div>    
                         </div>
 <br>
-
-
-
-                        <table id="tableItems" class="table table-hover table-condensed" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>created_at</th>
-                                    <th>updated_at</th>
-                                </tr>
-                            </thead>
-                          </table>
+                        
+                   
 
 
                     </div>
@@ -124,10 +175,12 @@
                 "ajax":  "{{ route('items.getItems') }}",
 
                 "columns": [
-                    {data: 'description', name: 'description'},
-                    {data: 'price', name: 'price'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'updated_at', name: 'updated_at'}
+                    {data: 'description'},
+                    {data: 'price'},
+                    {data: 'created_at'},
+                    {data: 'updated_at'},
+           
+                   
                 ]
             });
         });
@@ -207,45 +260,30 @@
                     <div class = "modal-body">
                         <button class="close" data-dismiss="modal">&times;</button>
                         <h4> Add Quantity</h4>
-                        <form action = "" id="addquanform" method="post" class="ajax">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label><i class = "ti-search"></i> Search</label>
-                                        <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
-                                    </div>
-                                    <div class="content table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <th>Description</th>
-                                                <th>Quantity in Stock</th>
-                                                <th>Quantity</th>
-                                                <th>WholeSale Price</th>
-                                                <th>Retail Price</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Item 69</td>
-                                                    <td>50</td>
-                                                    <td><div class="form-group">
-                                                            <input type="number" form="addquanform" class="form-control" id="WholeSale">
-                                                        </div>
-                                                    </td>
-                                                    <td>Php 150.00</td>
-                                                    <td>Php 175.00</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="text-right">                                           
-                                    <div class="col-md-12">                                                    
-                                        <input type="submit" form="addquanform" name="submitedit" class="btn btn-primary">
-                                        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                    </div>                             
-                                </div>
-                            </div>
-                        </form>
+                        <label><i class = "ti-search"></i> Search</label>
+                        <input type="text" onkeyup="searchItem2()" id="inputItem"  class="form-control border-input" placeholder="Enter the name of the item">
+                        <div class="table-responsive">
+                            {{--  <table class="table table-bordered" id="itemsTable">
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                    </tr>
+                                     @foreach ($products as $product)
+                                         <tr>
+                                            <td> {{$product->description}} </td>
+                                            <td> {{$product->price}} </td>
+                                         </tr>
+                                     @endforeach
+                                     
+                                    </table>
+                                    {{$products->links()}}  --}}
+                                    <table>
+                                        <tbody  id="itemsTable">
+
+                                        </tbody>
+                                    </table>
+                          </div>
+                       
                     </div>
                 </div>
             </div>

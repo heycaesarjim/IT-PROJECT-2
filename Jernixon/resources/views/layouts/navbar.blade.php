@@ -19,13 +19,16 @@
         <link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">
         <!-- tab style -->
         <link href="{{asset('assets/css/tab.css')}}" rel="stylesheet">
-
+       
         <link rel="stylesheet" href="{{asset('assets/css/bootstrapv3.3.7.css')}}">
+        {{--  <link href="{{asset('assets/bootstrap-4/css/bootstrap.min.css')}}" rel="stylesheet">  --}}
+
         <title>{{config('app.name')}}</title>
         <script src="{{asset('assets/js/jquery.js')}}"></script>
         
         {{--  <script src="{{ asset('js/app.js') }}"></script>  --}}
         
+        @yield('headScript')
     </head>
     
     <body>

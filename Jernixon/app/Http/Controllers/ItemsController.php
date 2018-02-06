@@ -16,13 +16,13 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('items.index');
-        // return view('items.index')->with('products',$products);
+        $products = Product::paginate(2);
+        // return view('items.index')   ;
+        return view('items.index')->with('products',$products);
     }
 
     public function getItems(){
-        
+
         $data = DB::table('products')->select('*');
         return Datatables::of($data)
             ->make(true);
@@ -70,7 +70,12 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+    //    $item = Product::find($id);
+        // $item = DB::select("SELECT * from products where product_id=$id");
+        $item = Product::where('description','LIKE','%'.$id.'%')
+                    ->orderBy('description','asc')
+                    ->get();
+        return $item;
     }
 
     /**

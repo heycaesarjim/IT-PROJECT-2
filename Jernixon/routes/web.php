@@ -19,6 +19,8 @@ Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems'
 Route::resource('items','ItemsController');
 Route::resource('reports', 'ReportsController');
 
+Route::get('/items/{id}', 'ItemsController@show');
+
 //Route::get('/items', 'ItemsController@index');
 //Route::get('/reports', 'ReportsController@index');
 
