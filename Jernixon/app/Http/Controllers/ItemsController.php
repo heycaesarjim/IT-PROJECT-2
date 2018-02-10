@@ -98,7 +98,7 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "updated successfully";
     }
 
     /**

@@ -28,27 +28,96 @@
         
 
         }
-        function searchItem2(){
-            $.ajax({
+        function searchItem2(a){
+        
+         $.ajax({
                 method: 'get',
-                url: 'items/' + document.getElementById("inputItem").value,
+                //url: 'items/' + document.getElementById("inputItem").value,
+                url: 'items/' + a.value,
                 dataType: "json",
                 success: function(data){
-                    
-                    $("#itemsTable tr").remove();
-                    var result = "";
-                    for(var i=0; i < data.length; i++){
-                        //alert(data[i].description);
-                        var thatTable = document.getElementById("itemsTable");
-                        var newRow = thatTable.insertRow(-1);
-                        var newCell = newRow.insertCell(-1);
-                        newCell.innerHTML = "<th style='background-color:grey;' >" +data[i].description+ "</th>";
+                    if(a.id === "addQuantity"){
+                        $("#addQuantityTbody tr").remove();
+                        for(var i=0; i < data.length; i++){
+                            //alert(data[i].description);
+                            var thatTable = document.getElementById("addQuantityTbody");
+                            var newRow = thatTable.insertRow(-1);
+                            var itemId = newRow.insertCell(-1);
+                            itemId.innerHTML = "<td>" + data[i].product_id + "</td>";
+                            var newCell = newRow.insertCell(-1);
+                            newCell.innerHTML = "<td>" +data[i].description+ "</td>";
+                            var secondCell = newRow.insertCell(-1); 
+                            secondCell.innerHTML = "<td>query</td>";
+                            var thirdCell = newRow.insertCell(-1);
+                            thirdCell.innerHTML = "<td>\
+                                    <input value='' type='number' min='1'> \
+                                </td>";
+                            //<form action='items/3' 'method'='POST' id='form" +data[i].product_id+ "'> \
+                            // <input type='text'> \
+                        // </form> \
+
+                            var forthCell = newRow.insertCell(-1);
+                            forthCell.innerHTML = "<td>" + data[i].price + "</td>";
+                            var fifthCell = newRow.insertCell(-1);
+                            fifthCell.innerHTML = "<td>query</td>";
+                            var sixthCell = newRow.insertCell(-1);
+                            //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
+                            sixthCell.innerHTML = "<td><button onclick='addQuantitySubmit(this)'>Submit</button></td>";
+                        }
+                    }else if(a.id === "subtractQuantity"){
+                        $("#subtractQuantityTbody tr").remove();
+                        for(var i=0; i < data.length; i++){
+                            //alert(data[i].description);
+                            var thatTable = document.getElementById("subtractQuantityTbody");
+                            var newRow = thatTable.insertRow(-1);
+                            var itemId = newRow.insertCell(-1);
+                            itemId.innerHTML = "<td>" + data[i].product_id + "</td>";
+                            var newCell = newRow.insertCell(-1);
+                            newCell.innerHTML = "<td>" +data[i].description+ "</td>";
+                            var secondCell = newRow.insertCell(-1); 
+                            secondCell.innerHTML = "<td>query</td>";
+                            var thirdCell = newRow.insertCell(-1);
+                            thirdCell.innerHTML = "<td>\
+                                    <input value='' type='number' min='1'> \
+                                </td>";
+
+
+                            var forthCell = newRow.insertCell(-1);
+                            forthCell.innerHTML = "<td>" + data[i].price + "</td>";
+                            var fifthCell = newRow.insertCell(-1);
+                            fifthCell.innerHTML = "<td>query</td>";
+                            var sixthCell = newRow.insertCell(-1);
+                            //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
+                            sixthCell.innerHTML = "  <select name='reason'>\
+                                                        <option value='Salable'>Salable</option>\
+                                                        <option value='Damaged-Salable'>Damaged-Salable</option>\
+                                                        <option value='Damaged'>Damaged</option>\
+                                                    </select>";
+                        }
+                    }
+                    if(data.length == 1){
+                        document.getElementById("mod_footer").innerHTML="<div class='col-md-12'>\
+                            <input type='submit' name='submitedit' class='btn btn-primary'>\
+                            <button class='btn btn-primary' data-dismiss='modal'>Cancel</button></div>";
+                    }else{
+                        $("#mod_footer div").remove();
                     }
                   
                 }
             });
-
+            
         }
+        function addQuantitySubmit(a){
+            var input = a.parentNode.previousSibling.previousSibling.previousSibling.childNodes[1].value;
+            if(input == ""){
+                a.parentNode.previousSibling.previousSibling.previousSibling.childNodes[1].focus();
+                a.parentNode.previousSibling.previousSibling.previousSibling.childNodes[1].setAttribute('style','border:1px solid red');
+            }else{
+                alert('to be continue..');
+            }
+            
+        }
+        
     </script>
 @endsection
 @section('right')
@@ -175,6 +244,7 @@
                 "ajax":  "{{ route('items.getItems') }}",
 
                 "columns": [
+                    
                     {data: 'description'},
                     {data: 'price'},
                     {data: 'created_at'},
@@ -261,7 +331,7 @@
                         <button class="close" data-dismiss="modal">&times;</button>
                         <h4> Add Quantity</h4>
                         <label><i class = "ti-search"></i> Search</label>
-                        <input type="text" onkeyup="searchItem2()" id="inputItem"  class="form-control border-input" placeholder="Enter the name of the item">
+                        <input type="text" onkeyup="searchItem2(this)" id="addQuantity" class="form-control border-input" placeholder="Enter the name of the item">
                         <div class="table-responsive">
                             {{--  <table class="table table-bordered" id="itemsTable">
                                     <tr>
@@ -277,8 +347,19 @@
                                      
                                     </table>
                                     {{$products->links()}}  --}}
-                                    <table>
-                                        <tbody  id="itemsTable">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td>Id</td>
+                                                <td>Description</td>
+                                                <td>Quantity in stock</td>
+                                                <td>Quantity</td>
+                                                <td>Whole sale price</td>
+                                                <td>Retail Price</td>
+                                                <td>Action</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody  id="addQuantityTbody">
 
                                         </tbody>
                                     </table>
@@ -362,69 +443,34 @@
 
     </div>
     <div id="subtract" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-
         <div class = "modal-dialog modal-lg">
-
             <div class = "modal-content">
-
                 <div class = "modal-body">
-
                     <button class="close" data-dismiss="modal">&times;</button>
+                    <h4> Subtract Quantity</h4>
+                    <label><i class = "ti-search"></i> Search</label>
+                    <input type="text" onkeyup="searchItem2(this)" id="subtractQuantity" class="form-control border-input" placeholder="Enter the name of the item">
+                    <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>Id</td>
+                                            <td>Description</td>
+                                            <td>Quantity in stock</td>
+                                            <td>Quantity</td>
+                                            <td>Whole sale price</td>
+                                            <td>Retail Price</td>
+                                            <td>Reason</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody  id="subtractQuantityTbody">
 
-                    <h4> Add Quantity</h4>
+                                    </tbody>
+                                </table>
+                      </div>
 
-                    <form action = "" id="reasonform" method="post" class="ajax">
-
-                        <div class="row">
-
-                            <div class="col-md-12">
-
-                                <div class="form-group">
-
-                                    <label><i class = "ti-search"></i> Search</label>
-                                    <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
-
-                                </div>
-                                <div class="content table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>Description</th>
-                                            <th>Quantity</th>
-                                            <th>WholeSale Price</th>
-                                            <th>Retail Price</th>
-                                            <th>Reason</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Item 69</td>
-                                                <td><div class="form-group">
-                                                        <input type="number" form="reasonform" class="form-control" id="WholeSale">
-                                                    </div>
-                                                </td>
-                                                <td>Php 150.00</td>
-                                                <td>Php 175.00</td>
-                                                <td><div class="form-group">
-                                                        <textarea class="form-control" form="reasonform" rows="4" id="comment"></textarea>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                       
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                               
-                            </div>
-                            <div class="text-right">                                           
-                                <div class="col-md-12">                                                    
-                                    <input type="submit" form="reasonform" name="submitedit" class="btn btn-primary">
-                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>                             
-                            </div>
-                        </div>
-
-                    </form>
+                </div>
+                <div class="modal-footer" id="mod_footer">
 
                 </div>
 
