@@ -40,7 +40,7 @@
 
     {{--  style="border: 2px solid green"  --}}
     <div class="row">
-        <div class="col-md-8" >
+        <div class="col-md-12" >
             <div class="card" >
                 <div class="header">
                         <div class="row" >
@@ -60,23 +60,23 @@
                                 <ul class="list-group-item-danger">
                                     <li>Add datatables for items</li>
                                   </ul>
+
+                                  <table id="dashboardDatatable" class="table table-hover table-condensed" style="width:100%">
+                                    <thead> 
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Quantity in Stock</th>
+                                            <th>Wholesale Price</th>
+                                            <th>Retail Price</th>
+                                            <th>Add to Cart</th>
+                                        </tr>
+                                    </thead>
+                                  </table>
                         </div>
 
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4" >
-                <div class="card" >
-                    <div class="header">
-                        <div class="well well-sm">
-                            <h5>Customer name:</h5>
-                            <h5>Date Purchase:</h5>
-                        </div>
-                    </div>
-               </div>
-        </div>
-
     </div>
 
     <div class="row">

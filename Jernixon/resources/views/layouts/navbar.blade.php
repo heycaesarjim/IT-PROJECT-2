@@ -77,9 +77,9 @@
                 </div> 
          </div>
 
+    @yield('modals')
     @yield('jqueryScript')
     </body>
     
-    @yield('modals')
     @yield('js_link')
 </html>
