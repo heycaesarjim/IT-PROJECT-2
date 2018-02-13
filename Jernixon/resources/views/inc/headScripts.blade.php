@@ -109,25 +109,6 @@
                       //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
                       sixthCell.innerHTML = "<td><button class='btn btn-danger' onclick='window.alert(\"to be continue...\")'>Delete</button></td>";
                   }
-              }else if(a.id === "dashboardSearchItem"){
-                $("#dashboardDatatable tr").remove();                        
-                  for(var i=0; i < data.length; i++){
-                      var thatTable = document.getElementById("dashboardDatatable");
-                      var newRow = thatTable.insertRow(-1);
-                      var itemId = newRow.insertCell(-1);
-                      itemId.innerHTML = "<td>" + data[i].product_id + "</td>";
-                      var firstCell = newRow.insertCell(-1);
-                      firstCell.innerHTML = "<td>" +data[i].description+ "</td>";
-                      var secondCell = newRow.insertCell(-1); 
-                      secondCell.innerHTML = "<td>query</td>";
-                      var thirdCell = newRow.insertCell(-1);
-                      thirdCell.innerHTML = "<td>" + data[i].price + "</td>";
-                      var forthCell = newRow.insertCell(-1); 
-                      forthCell.innerHTML = "<td>query</td>";
-                      var fifthCell = newRow.insertCell(-1);
-                      //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
-                      fifthCell.innerHTML = "<td><button class='btn btn-success' onclick='window.alert(\"to be continue...\")'>Add</button></td>";
-                  }
               }
             
           }

@@ -3,7 +3,57 @@
   class="active"
 @endsection
 
-@extends('inc.headScripts')
+@section('headScript')
+    <script>
+        function searchItem(a){
+            $.ajax({
+                    method: 'get',
+                    //url: 'items/' + document.getElementById("inputItem").value,
+                    url: 'items/' + a.value,
+                    dataType: "json",
+                        success: function(data){
+                            if(a.id === "dashboardSearchItem"){
+                                $("#dashboardDatatable tr").remove();                        
+                                for(var i=0; i < data.length; i++){
+                                    var thatTable = document.getElementById("dashboardDatatable");
+                                    var newRow = thatTable.insertRow(-1);
+                                    var itemIdCell = newRow.insertCell(-1);
+                                    itemIdCell.innerHTML = "<td>" + data[i].product_id + "</td>";
+                                    var secondCell = newRow.insertCell(-1);
+                                    secondCell.innerHTML = "<td>" +data[i].description+ "</td>";
+                                    var thirdCell = newRow.insertCell(-1); 
+                                    thirdCell.innerHTML = "<td>query</td>";
+                                    var forthCell = newRow.insertCell(-1);
+                                    forthCell.innerHTML = "<td>" + data[i].price + "</td>";
+                                    var fifthCell = newRow.insertCell(-1); 
+                                    fifthCell.innerHTML = "<td>query</td>";
+                                    var sixthCell = newRow.insertCell(-1);
+                                    //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
+                                    sixthCell.innerHTML = "<td><button class='btn btn-success' onclick='addToCart(this)'>Add</button></td>";
+                                }
+                            }
+                        }
+                });
+        }
+        function addToCart(a){
+            var data  = $(a.parentNode.parentNode.innerHTML).slice(0,-1);
+             var thatTbody = document.getElementById("cartTbody");
+             var newRow = thatTbody.insertRow(-1);
+             //newTr.innerHTML = a.parentNode.parentNode.innerHTML ;
+             //thatTbody.append(newTr);
+             for(var i=0; i<data.length;i++){
+                newRow.insertCell(-1).innerHTML = data[i].innerHTML;
+            }
+            newRow.insertCell(-1).innerHTML = "<td><input type='number' min='1'></td>";
+            newRow.insertCell(-1).innerHTML ="<td></td>"
+            newRow.insertCell(-1).innerHTML = "<td><button class='btn btn-danger' onclick='removeRow(this)'>Remove</button></td>";
+        }
+        function removeRow(a){
+            var i = a.parentNode.parentNode.rowIndex;
+            document.getElementById("cartTable").deleteRow(i);
+        }
+    </script>
+@endsection
 
 @section('right')
 <div class="content">
@@ -51,10 +101,10 @@
                                         <div class="row">
                                             <div class="col col-xs-5">
                                                 <label><i class = "ti-search"></i> Search</label>
-                                                <input type="text" onkeyup="searchItem2(this)" id="dashboardSearchItem" class="form-control border-input" placeholder="Enter the name of the item">
+                                                <input type="text" onkeyup="searchItem(this)" id="dashboardSearchItem" class="form-control border-input" placeholder="Enter the name of the item">
                                             </div>
                                             <div class="col col-xs-7 text-right">
-                                                    <a href = "#addtocart" data-toggle="modal" class="btn btn-lg btn-primary btn-create"><i class = "fa fa-shopping-cart"></i></a>
+                                                    <a href = "#openCart" data-toggle="modal" class="btn btn-lg btn-primary btn-create"><i class = "fa fa-shopping-cart"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +112,7 @@
                                   <table class="table table-hover table-condensed" style="width:100%">
                                     <thead> 
                                         <tr>
-                                            <th>Ids</th>
+                                            <th>Id</th>
                                             <th>Description</th>
                                             <th>Quantity in Stock</th>
                                             <th>Wholesale Price</th>
@@ -98,8 +148,8 @@
 @endsection     
 
 @section('modals')
-<div id="addtocart" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-    <div class = "modal-dialog">
+<div id="openCart" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+    <div class = "modal-dialog modal-lg">
         <div class = "modal-content">
             <div class = "modal-body">
                 <button class="close" data-dismiss="modal">&times;</button>
@@ -126,37 +176,42 @@
 
                 </div>
                 
-                <div class="row">
-                    <div class="col-md-3 text-right">
-                        <label>Total Price: </label>
-                    </div>
-                    <div class="col-md-9">
-                        <input type="text" disabled class="form-control border-input" form="purchase" value="500">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-striped table-bordered table-list">
+                <div class="row"> 
+                    <div class="col-md-12 table-responsive">
+                        <table id="cartTable" class="table table-striped table-bordered table-list">
                             <thead>
                                 <tr>
-                                    <th class="hidden-xs">Description</th>
+                                    <th>Id</th>
+                                    <th>Item</th>
+                                    <th>Quantity Left</th>
+                                    <th>Wholesale Price</th>
                                     <th>Retail Price</th>
                                     <th>Quantity Purchase</th>
                                     <th>Total Price</th>
                                     <th>Action</th>
                                 </tr> 
                             </thead>
-                            <tbody>
+                            <tbody id="cartTbody">
                             </tbody>
                         </table>
-                        <div class="text-right">                                           
-                            <div class="col-md-12">                                                    
-                                <input type="submit" form="purchase" class="btn btn-primary">
-                                <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                            </div>                             
-                        </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-4 text-right">
+                                <label>Total Price: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" disabled class="form-control border-input" form="purchase" value="0">
+                            </div>
+                            <div class="text-right">                                           
+                                <div class="col-md-4">                                                    
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                </div>                             
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
      </div>
@@ -183,8 +238,8 @@
 @endsection  --}}
 @section('js_link')
 <!--   Core JS Files   -->
-<script src="{{asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/jquery-1.10.2.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 {{--  <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>  --}}
 
 @endsection

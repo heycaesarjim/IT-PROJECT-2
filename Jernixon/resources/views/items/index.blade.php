@@ -123,8 +123,8 @@
 @section('jqueryScript')
     <script type="text/javascript">
         $(document).ready(function() {
-
-             $('#tableItems').DataTable({
+          
+            $('#tableItems').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax":  "{{ route('items.getItems') }}",
