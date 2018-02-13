@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'PagesController@index');
-Route::get('/dashboard', 'PagesController@dashboard');
+// Route::get('/dashboard', 'PagesController@dashboard');
+//dataTable for dashboard
+//Route::get('/dashboard/getItems', 'DashboardController@getItems')->name('dashboardItems.getItems');
+Route::get('/dashboard', 'DashboardController@index');
 Route::get('/employees', 'PagesController@employees');
 
 Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems');

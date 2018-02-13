@@ -4,122 +4,7 @@
        class="active"
 @endsection
 
-@section('headScript')
-    <script>
-		function searchItem() {
-
-		  // Declare variables
-		  var input, filter, table, tr, td, i;
-		  input = document.getElementById("inputItem");
-		  filter = input.value.toUpperCase();
-          table = document.getElementById("itemsTable");
-          tr = table.getElementsByTagName("tr");
-                // Loop through all table rows, and hide those who don't match the search query
-                for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                    } else {
-                    tr[i].style.display = "none";
-                    }
-                }
-                }
-        
-
-        }
-        function searchItem2(a){
-        
-         $.ajax({
-                method: 'get',
-                //url: 'items/' + document.getElementById("inputItem").value,
-                url: 'items/' + a.value,
-                dataType: "json",
-                success: function(data){
-                    if(a.id === "addQuantity"){
-                        $("#addQuantityTbody tr").remove();
-                        for(var i=0; i < data.length; i++){
-                            //alert(data[i].description);
-                            var thatTable = document.getElementById("addQuantityTbody");
-                            var newRow = thatTable.insertRow(-1);
-                            var itemId = newRow.insertCell(-1);
-                            itemId.innerHTML = "<td>" + data[i].product_id + "</td>";
-                            var newCell = newRow.insertCell(-1);
-                            newCell.innerHTML = "<td>" +data[i].description+ "</td>";
-                            var secondCell = newRow.insertCell(-1); 
-                            secondCell.innerHTML = "<td>query</td>";
-                            var thirdCell = newRow.insertCell(-1);
-                            thirdCell.innerHTML = "<td>\
-                                    <input value='' type='number' min='1'> \
-                                </td>";
-                            //<form action='items/3' 'method'='POST' id='form" +data[i].product_id+ "'> \
-                            // <input type='text'> \
-                        // </form> \
-
-                            var forthCell = newRow.insertCell(-1);
-                            forthCell.innerHTML = "<td>" + data[i].price + "</td>";
-                            var fifthCell = newRow.insertCell(-1);
-                            fifthCell.innerHTML = "<td>query</td>";
-                            var sixthCell = newRow.insertCell(-1);
-                            //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
-                            sixthCell.innerHTML = "<td><button onclick='addQuantitySubmit(this)'>Submit</button></td>";
-                        }
-                    }else if(a.id === "subtractQuantity"){
-                        $("#subtractQuantityTbody tr").remove();
-                        for(var i=0; i < data.length; i++){
-                            //alert(data[i].description);
-                            var thatTable = document.getElementById("subtractQuantityTbody");
-                            var newRow = thatTable.insertRow(-1);
-                            var itemId = newRow.insertCell(-1);
-                            itemId.innerHTML = "<td>" + data[i].product_id + "</td>";
-                            var newCell = newRow.insertCell(-1);
-                            newCell.innerHTML = "<td>" +data[i].description+ "</td>";
-                            var secondCell = newRow.insertCell(-1); 
-                            secondCell.innerHTML = "<td>query</td>";
-                            var thirdCell = newRow.insertCell(-1);
-                            thirdCell.innerHTML = "<td>\
-                                    <input value='' type='number' min='1'> \
-                                </td>";
-
-
-                            var forthCell = newRow.insertCell(-1);
-                            forthCell.innerHTML = "<td>" + data[i].price + "</td>";
-                            var fifthCell = newRow.insertCell(-1);
-                            fifthCell.innerHTML = "<td>query</td>";
-                            var sixthCell = newRow.insertCell(-1);
-                            //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
-                            sixthCell.innerHTML = "  <select name='reason'>\
-                                                        <option value='Salable'>Salable</option>\
-                                                        <option value='Damaged-Salable'>Damaged-Salable</option>\
-                                                        <option value='Damaged'>Damaged</option>\
-                                                    </select>";
-                        }
-                    }
-                    if(data.length == 1){
-                        document.getElementById("mod_footer").innerHTML="<div class='col-md-12'>\
-                            <input type='submit' name='submitedit' class='btn btn-primary'>\
-                            <button class='btn btn-primary' data-dismiss='modal'>Cancel</button></div>";
-                    }else{
-                        $("#mod_footer div").remove();
-                    }
-                  
-                }
-            });
-            
-        }
-        function addQuantitySubmit(a){
-            var input = a.parentNode.previousSibling.previousSibling.previousSibling.childNodes[1].value;
-            if(input == ""){
-                a.parentNode.previousSibling.previousSibling.previousSibling.childNodes[1].focus();
-                a.parentNode.previousSibling.previousSibling.previousSibling.childNodes[1].setAttribute('style','border:1px solid red');
-            }else{
-                alert('to be continue..');
-            }
-            
-        }
-        
-    </script>
-@endsection
+@extends('inc.headScripts')
 @section('right')
         <i><p style="color:red;font-size:20px">Items under construction!</p></i>
 
@@ -238,21 +123,19 @@
 @section('jqueryScript')
     <script type="text/javascript">
         $(document).ready(function() {
+
              $('#tableItems').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax":  "{{ route('items.getItems') }}",
-
                 "columns": [
-                    
                     {data: 'description'},
                     {data: 'price'},
                     {data: 'created_at'},
                     {data: 'updated_at'},
-           
-                   
                 ]
             });
+
         });
     </script>
 @endsection
@@ -267,7 +150,7 @@
                             {!! Form::open(['action'=>'ItemsController@store', 'method'=>'post']) !!}
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-3 text-right">
+                                        <div class="col-md-3">
                                             {{Form::label('description', 'Description:')}}
                                         </div>
                                         <div class="col-md-9">
@@ -278,7 +161,7 @@
 
                                 <div class="form-group">                                
                                     <div class="row">
-                                        <div class="col-md-3 text-right">
+                                        <div class="col-md-3">
                                             {{Form::label('Quantity in stock:')}}
                                         </div>
                                         <div class="col-md-9">
@@ -288,7 +171,7 @@
                                 </div>
                                 <div class="form-group">    
                                     <div class="row">
-                                        <div class="col-md-3 text-right">
+                                        <div class="col-md-3">
                                             {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
                                         </div>
                                         <div class="col-md-9">
@@ -299,11 +182,11 @@
 
                                 <div class="form-group">   
                                     <div class="row">
-                                        <div class="col-md-3 text-right">                                                             
+                                        <div class="col-md-3">                                                             
                                             {{Form::label('Retail Price', 'Retail Price:')}}
                                         </div>
                                         <div class="col-md-9">                                    
-                                            {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'Retail Price'])}}
+                                            {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'Retail Price','min'=>'1'])}}
                                         </div>
                                     </div>
                                 </div>
@@ -480,187 +363,131 @@
 
     </div>
     <div id="return" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-
         <div class = "modal-dialog">
-
             <div class = "modal-content">
-
                 <div class = "modal-body">
-
                     <button class="close" data-dismiss="modal">&times;</button>
-
-                    <h4>Return of Item</h4>
-
-                    <form id="returnform" action = "" method="post" class="ajax">
-
-                        <div class="form-group">                                
-                            <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>Customer Name:</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control border-input" form="returnform" placeholder="Customer Name">
-
-                                </div>
+                    <h4>Return of Item</h4>          
+                        <div class="row">
+                            <div class="col-md-3">
+                                    <label><i class = "ti-search"></i> Search</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" onkeyup="searchItem2(this)" id="returnItem" class="form-control border-input" placeholder="Name of the returned item">
                             </div>
                         </div>
+                                    <table class="table">
+                                        <thead>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td>Quantity</td>
+                                                    <td>Action</td>
+                                                </tr>
+                                        </thead>
+                                        <tbody  id="returnItemTbody">
+                                        </tbody>
+                                    </table>
 
-                        <div class="form-group">
+                        <div id="returnFormDiv" style="display:none">
                             <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>Item Purchased:</label>
-                                </div>
-                                <div class="col-md-9">
-                                     <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>
-                                     <div class="text-right">
-                                        <button ><i class="ti-plus"></i></button>
-                                     </div>
-
-                                </div>
+                                    <div class="col-md-3">
+                                        <label>Customer Name:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control border-input" form="returnform" placeholder="Customer Name">
+                                    </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="row">
-                                <div class="col-md-3 text-right">
+                                    <div class="col-md-3">
+                                        <label>Item:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input id="returnItemName" type="text" class="form-control border-input" disabled>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
                                     <label>Quantity:</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="number" form="returnform" class="form-control border-input">
-
+                                    <input type="number" form="returnform" class="form-control border-input" min="0">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="row">
-                                <div class="col-md-3 text-right">
+                                <div class="col-md-3">
                                     <label>Total price:</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="number" form="returnform" class="form-control border-input">
-
+                                    <input type="number" form="returnform" class="form-control border-input" min="0">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="row">
-                                <div class="col-md-3 text-right">
+                                <div class="col-md-3">
                                     <label>Reason:</label>                                            
                                 </div>
                                 <div class="col-md-9">
                                     <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="row">
-                                <div class="col-md-3 text-right">
+                                <div class="col-md-3">
                                     <label>Status:</label>                                            
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" form="returnform" name="status">
                                 </div>
                             </div>
-                        </div>
 
-                         
-                        <div class="form-group">
                             <div class="row">
                                 <div class="text-right">                                           
                                     <div class="col-md-12">                                                    
-                                        <input type="submit" form="returnform" name="Save" value="Save" class="btn btn-primary">
+                                        <input type="submit" name="Save" onclick="window.alert('to be continue..')" value="Save" class="btn btn-primary">
                                         <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                     </div>                             
                                 </div>
                             </div>
                         </div>
-
-                    
-                       
-                      
-                    </form>
-
                 </div>
-
             </div>
-
          </div>
-
     </div>
     <div id="remove" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-
         <div class = "modal-dialog modal-lg">
-
             <div class = "modal-content">
-
                 <div class = "modal-body">
-
                     <button class="close" data-dismiss="modal">&times;</button>
-
                     <h4>Remove</h4>
-
-                    <form action = "" id="removeform" method="post" class="ajax">
-
                         <div class="row">
-
                             <div class="col-md-12">
-
-                                <div class="form-group">
-
+                                <div class="col-md-3">
                                     <label><i class = "ti-search"></i> Search</label>
-                                    <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
-
                                 </div>
-                                <div class="content table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>Description</th>
-                                            <th>Quantity in Stock</th>
-                                            <th>Quantity</th>
-                                            <th>WholeSale Price</th>
-                                            <th>Retail Price</th>
-                                            <th>Delete</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Item 69</td>
-                                                <td>50</td>
-                                                <td><div class="form-group">
-                                                        <input type="number" form="removeform" class="form-control" >
-                                                    </div>
-                                                </td>
-                                                <td>Php 150.00</td>
-                                                <td>Php 175.00</td>
-                                                <td><button form="removeform"><span class="glyphicon glyphicon-remove"></span></button></td>
-                                                
-                                            </tr>
-                                       
-                                        </tbody>
-                                    </table>
-
+                                <div class="col-md-5">
+                                    <input type="text" onkeyup="searchItem2(this)" id="removeItem" class="form-control border-input" placeholder="Name of the returned item">
                                 </div>
-                               
-                            </div>
-                            <div class="text-right">                                           
-                                <div class="col-md-12">                                                    
-                                    <input type="submit" form="removeform" value="Save" class="btn btn-primary">
-                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>                             
                             </div>
                         </div>
-
-                    </form>
-
-                </div>
-
+                        <div class="content table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>Id</th>
+                                    <th>Description</th>
+                                    <th>Quantity in Stock</th>
+                                    <th>WholeSale Price</th>
+                                    <th>Retail Price</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody id="removeItemTbody">
+                                </tbody>
+                            </table>
+                        </div>
+                </div>    
             </div>
-
-         </div>
-
+        </div>
     </div>
+
+
 @endsection
 
 @section('js_link')

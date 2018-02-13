@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/logo.png')}}">
 
+            
         {{--  <link rel="stylesheet" href="{{asset('css/app.css')}}">  --}}
         <!-- Animation library for notifications   -->
         <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
@@ -76,9 +77,9 @@
                 </div> 
          </div>
 
+    @yield('modals')
     @yield('jqueryScript')
     </body>
     
-    @yield('modals')
     @yield('js_link')
 </html>
