@@ -20,6 +20,11 @@ Route::get('/employees', 'PagesController@employees');
 
 Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems');
 Route::resource('items','ItemsController');
+
+Route::get('/reports/getTransactions', 'ReportsController@getTransactions')->name('reports.getTransactions');
+Route::get('/reports/getReturns', 'ReportsController@getReturns')->name('reports.getReturns');
+Route::get('/reports/getItemsAdded', 'ReportsController@getItemsAdded')->name('reports.getItemsAdded');
+Route::get('/reports/getRemovedItems', 'ReportsController@getRemovedItems')->name('reports.getRemovedItems');
 Route::resource('reports', 'ReportsController');
 
 Route::get('/items/{id}', 'ItemsController@show');
