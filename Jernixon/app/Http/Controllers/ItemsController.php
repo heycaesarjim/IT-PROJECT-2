@@ -46,18 +46,20 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-                'description' => 'required',
-                'quantityInStock' => 'required',
-                'wholeSalePrice' => 'required',
-                'retailPrice' => 'required'
+                    'description' => 'required',
+                    'quantityInStock' => 'required',
+                    'wholeSalePrice' => 'required',
+                    'retailPrice' => 'required'
         ]);
-        return "hahaha";
-        // $item = new Product;
-        // $item->description = $request->input('description');
-        // $item->quantityInStock = $request->input('quantityInStock');
-        // $item->wholeSalePrice = $request->input('wholeSalePrice');
-        // $item->retailPrice = $request->input('retailPrice');
-        // $item->save();
+
+        //Create new Item
+        $item = new Product;
+        $item->description = $request->input('description');
+        //$item->quantityInStock = $request->input('quantityInStock');
+        $item->price = $request->input('wholeSalePrice');
+        //$item->retailPrice = $request->input('retailPrice');
+        $item->save();
+        return response($request->all());
         // return "success";
        // return redirect('/items')->with('success','Success adding item');
     }
@@ -109,6 +111,6 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //$item = Product::find($id)->delete()
     }
 }

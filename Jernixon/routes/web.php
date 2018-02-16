@@ -27,7 +27,7 @@ Route::get('/reports/getItemsAdded', 'ReportsController@getItemsAdded')->name('r
 Route::get('/reports/getRemovedItems', 'ReportsController@getRemovedItems')->name('reports.getRemovedItems');
 Route::resource('reports', 'ReportsController');
 
-Route::get('/items/{id}', 'ItemsController@show');
+//Route::get('/items/{id}', 'ItemsController@show');
 
 //Route::get('/items', 'ItemsController@index');
 //Route::get('/reports', 'ReportsController@index');

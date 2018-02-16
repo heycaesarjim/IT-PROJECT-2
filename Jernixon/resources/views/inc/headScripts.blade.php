@@ -107,7 +107,7 @@
                       fifthCell.innerHTML = "<td>query</td>";
                       var sixthCell = newRow.insertCell(-1);
                       //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
-                      sixthCell.innerHTML = "<td><button class='btn btn-danger' onclick='window.alert(\"to be continue...\")'>Delete</button></td>";
+                      sixthCell.innerHTML = "<td><button id='removedItemDelete' class='btn btn-danger'>Delete</button></td>";
                   }
               }
             

@@ -6,13 +6,13 @@ class="active"
 <script type="text/javascript">
     $(document).ready(function() {
         $("#transactionDTButton").click(function(){
+            //slideUp any div that has a display:block value
             $("div[style='display: block;']").slideUp("slow");
             $("#transactionDiv").slideDown("slow",function(){
-                //find div with dislplay:block and slide it UP
                 $('#transactionsTable').DataTable({
+                    "destroy": true,
                     "processing": true,
                     "serverSide": true,
-                    "destroy": true,
                     "colReorder": true,   
                     "ajax":  "{{ route('reports.getTransactions') }}",
                     "columns": [
@@ -25,7 +25,6 @@ class="active"
             });
             $("#transactionDiv").attr("style","display:block");            
             //  $("#transactionDTButton").attr("onclick","hideTransactionDTButton()");
-            //slideUp any div if it has a display:block value
         });
         
         $("#returnsDTButton").click(function(){ 
@@ -50,7 +49,8 @@ class="active"
             //$("#returnsDTButton").attr("onclick","hideReturnsDTButton()");
         });
         $("#itemsAddedDTButton").click(function(){
-            $("div[style='display: block;']").slideUp("slow",function(){
+            $("div[style='display: block;']").slideUp("slow");            
+            $("#itemsAddedDiv").slideDown("slow",function(){
                 $('#itemsAddedTable').DataTable({
                     "processing": true,
                     "serverSide": true,
@@ -66,12 +66,13 @@ class="active"
                 });
                 
             });            
-            $("#itemsAddedDiv").slideDown("slow");
+          //  $("#itemsAddedDiv").slideDown("slow");
             $("#itemsAddedDiv").attr("style","display:block");            
             // $("#itemsAddedDTButton").attr("onclick","hideitemsAddedDTButton()");
         });
         $("#removedItemsDTButton").click(function(){
-            $("div[style='display: block;']").slideUp("slow",function(){
+            $("div[style='display: block;']").slideUp("slow");                        
+            $("#removedItemsDiv").slideDown("slow",function(){
                 $('#removedItemsTable').DataTable({
                     "processing": true,
                     "serverSide": true,
@@ -87,7 +88,7 @@ class="active"
                 });
                 
             });            
-            $("#removedItemsDiv").slideDown("slow");
+         //   $("#removedItemsDiv").slideDown("slow");
             $("#removedItemsDiv").attr("style","display:block");            
             // $("#removedItemsDTButton").attr("onclick","hideRemovedItemsDTButton()");
         });
@@ -172,65 +173,68 @@ class="active"
                         </div>
                     </div>
                     
-                    
-                    <div id="transactionDiv" style="display:none">
-                        <table id="transactionsTable"  class="table table-hover table-condensed" >
-                            <thead >
-                                <tr>
-                                    <td>Item Purchased</td>
-                                    <td>Quantity</td>
-                                    <td>Wholesale Price</td>
-                                    <td>Retail Price</td>
-                                    <td>Total Price</td>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>                        
-                    </div> 
-                    <div id="returnsDiv" style="display:none">
-                        <div class="content table-responsive table-full-width">
-                            <ul class="list-group-item-danger">
-                                <li>Add datatables for returns</li>
-                            </ul>
-                        </div>
-                        <table id="returnsTable" class="table table-hover table-condensed">
-                            <thead>
-                                <tr>
-                                    <td>description</td>
-                                    <td>Quantity</td>
-                                    <td>Wholesale Price</td>
-                                    <td>Retail Price</td>
-                                    <td>Total Price</td>
-                                    <td>Reason</td>
-                                    <td>Status</td>
-                                </tr>
-                            </thead>
-                        </table>                        
-                    </div> 
-                    <div id="itemsAddedDiv" style="display:none">
-                        <div class="content table-responsive table-full-width">
-                            <ul class="list-group-item-danger">
-                                <li>Add datatables for added items</li>
-                            </ul>
-                            <table id="itemsAddedTable" class="table table-hover table-condensed">
-                                <thead>
+                    {{--  <div id="paraentDivFour" style="border:2px solid green; display:none">  --}}
+                        <div id="transactionDiv" style="display:none">
+                            <table id="transactionsTable"  class="table table-hover table-condensed" >
+                                <thead >
                                     <tr>
-                                        <td>Description</td>
+                                        <td>Item Purchased</td>
+                                        <td>Quantity</td>
                                         <td>Wholesale Price</td>
                                         <td>Retail Price</td>
-                                        <td>Quantity Added</td>
+                                        <td>Total Price</td>
                                     </tr>
                                 </thead>
-                            </table>
-                        </div>
-                    </div> 
-                    <div id="removedItemsDiv" style="display:none">
-                        <div class="content table-responsive table-full-width">
-                            <ul class="list-group-item-danger">
-                                <li>Add datatables for removed items</li>
-                            </ul>
-                        </div>
-                    </div> 
+                                <tbody></tbody>
+                            </table>                        
+                        </div> 
+                        <div id="returnsDiv" style="display:none">
+                            <div class="content table-responsive table-full-width">
+                            </div>
+                            <table id="returnsTable" class="table table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td>description</td>
+                                        <td>Quantity</td>
+                                        <td>Wholesale Price</td>
+                                        <td>Retail Price</td>
+                                        <td>Total Price</td>
+                                        <td>Reason</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                            </table>                        
+                        </div> 
+                        <div id="itemsAddedDiv" style="display:none">
+                            <div class="content table-responsive table-full-width">
+                                <table id="itemsAddedTable" class="table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>Wholesale Price</td>
+                                            <td>Retail Price</td>
+                                            <td>Quantity Added</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div> 
+                        <div id="removedItemsDiv" style="display:none">
+                            <div class="content table-responsive table-full-width">
+                                <table id="removedItemsTable" class="table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>Wholesale Price</td>
+                                            <td>Retail Price</td>
+                                            <td>Quantity Added</td>
+                                            <td>Reason</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div> 
+                    {{--  </div>  --}}
                     
                 </div>
             </div>
