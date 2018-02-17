@@ -127,9 +127,24 @@ class="active"
     
     @section('jqueryScript')
     <script type="text/javascript">
-        
         $(document).ready(function() {
-            
+            //alert(document.querySelectorAll("#removeItemTbody tr>td:last-child button").length);
+
+            //$("#removeItemTbody button").on("click",function(e){
+              //  alert("hi");
+                //alert($(this).attr("id"))
+                //e.preventDefault(); //prevent the page to load when submitting form
+                /*$.ajax({
+                    method: 'get',
+                    //url: 'items/' + document.getElementById("inputItem").value,
+                    url: 'items/' + e.value,
+                    dataType: "json",
+                    success: function(data){
+
+                    }
+                })
+                */
+            //});
             $('#tableItems').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -167,8 +182,8 @@ class="active"
                         data:data,
                             //_token:$("#_token"),
                         success:function(data){
-                            $("#errorDiv p").remove();
-                            $("#errorDiv").removeClass("alert-danger hidden")
+                            $("#errorDivAddNewItem p").remove();
+                            $("#errorDivAddNewItem").removeClass("alert-danger hidden")
                                           .addClass("alert-success")
                                           .html("<h1>Success</h1>");
                                           document.getElementById("formAddNewItem").reset();
@@ -176,8 +191,8 @@ class="active"
                         },
                         error:function(data){
                             var response = data.responseJSON;
-                            $("#errorDiv").removeClass("hidden").addClass("alert-danger");
-                            $("#errorDiv").html(function(){
+                            $("#errorDivAddNewItem").removeClass("hidden").addClass("alert-danger");
+                            $("#errorDivAddNewItem").html(function(){
                                 var addedHtml="";
                                 for (var key in response.errors) {
                                     addedHtml += "<p>"+response.errors[key]+"</p>";
@@ -193,21 +208,7 @@ class="active"
                     
                 })
 
-                $("#removedItemDelete").click(function(){
-                    alert('hi')
-                    alert($(this).attr("id"))
-                    //e.preventDefault(); //prevent the page to load when submitting form
-                    /*$.ajax({
-                        method: 'get',
-                        //url: 'items/' + document.getElementById("inputItem").value,
-                        url: 'items/' + e.value,
-                        dataType: "json",
-                        success: function(data){
 
-                        }
-                    })
-                    */
-                });
         });
     </script>
     @endsection
@@ -219,7 +220,7 @@ class="active"
                 <div class = "modal-body">
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4>Add New Item</h4>
-                    <div class="alert alert-danger hidden" id="errorDiv">
+                    <div class="alert alert-danger hidden" id="errorDivAddNewItem">
                      
                     </div>
                     {!! Form::open(['method'=>'post','id'=>'formAddNewItem']) !!}
@@ -535,6 +536,9 @@ class="active"
                 <div class = "modal-body">
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4>Remove</h4>
+                    <div class="alert alert-success" id="errorDivRemove" style="display:none">
+                        <h1>Success</h1>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-3">
@@ -555,7 +559,7 @@ class="active"
                                 <th>Retail Price</th>
                                 <th>Action</th>
                             </thead>
-                            <tbody id="removeItemTbody">
+                            <tbody id="removeItemTbody" >
                             </tbody>
                         </table>
                     </div>

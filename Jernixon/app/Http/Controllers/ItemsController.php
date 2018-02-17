@@ -111,6 +111,10 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //$item = Product::find($id)->delete()
+        $item = DB::select("DELETE from products where product_id=$id"); 
+        //"Delete from items where name='$item_name'"       
+        //$item = Product::find(6);
+        //return \Response::json($item);
+        return "success!";
     }
 }
