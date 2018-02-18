@@ -18,6 +18,8 @@ Route::get('/', 'PagesController@index');
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/employees', 'PagesController@employees');
 
+Route::Post('items/addQuantity','ItemsController@addQuantity');
+Route::Post('items/subtractQuantity','ItemsController@subtractQuantity');
 Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems');
 Route::resource('items','ItemsController');
 

@@ -29,13 +29,13 @@
                                     fifthCell.innerHTML = "<td>query</td>";
                                     var sixthCell = newRow.insertCell(-1);
                                     //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
-                                    sixthCell.innerHTML = "<td><button class='btn btn-success' onclick='addToCart(this)'>Add</button></td>";
+                                    sixthCell.innerHTML = "<td><button class='btn btn-success' onclick='addItemToCart(this)'>Add</button></td>";
                                 }
                             }
                         }
                 });
         }
-        function addToCart(a){
+        function addItemToCart(a){
             var data  = $(a.parentNode.parentNode.innerHTML).slice(0,-1);
              var thatTbody = document.getElementById("cartTbody");
              var newRow = thatTbody.insertRow(-1);
@@ -46,11 +46,14 @@
             }
             newRow.insertCell(-1).innerHTML = "<td><input type='number' min='1'></td>";
             newRow.insertCell(-1).innerHTML ="<td></td>"
-            newRow.insertCell(-1).innerHTML = "<td><button class='btn btn-danger' onclick='removeRow(this)'>Remove</button></td>";
+            newRow.insertCell(-1).innerHTML = "<td><button class='btn btn-danger' onclick='removeRowInCart(this)'>Remove</button></td>";
         }
-        function removeRow(a){
-            var i = a.parentNode.parentNode.rowIndex;
-            document.getElementById("cartTable").deleteRow(i);
+        function removeRowInCart(button){
+            //var i = a.parentNode.parentNode.rowIndex;
+            //document.getElementById("cartTable").deleteRow(i);
+            var row = button.parentNode.parentNode; //row
+            $(row).hide(1000);     
+                   
         }
     </script>
 @endsection

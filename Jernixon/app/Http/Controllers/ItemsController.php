@@ -98,11 +98,24 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        return "updated successfully";
+    // public function update(Request $request, $id)
+    // {
+    //     return "updated successfully";
+    // }
+
+    public function addQuantity(Request $request){
+        //update purchase set price='$newUnitCost', quantity='$newPurchase' WHERE item_id='$item_id' and price='$oldUnitCost' and quantity='$oldPurchase'"
+        //$name = $request->input('user.name'); 
+        //dd=(json_decode($request->getContent(), true));
+        //$data = $request->json()->all();
+        return "pending query...";
+       // $item = DB::select("update product set _='$request->input('inputValue')'");
     }
 
+    public function subtractQuantity(Request $request){
+        
+        return "pending query...";        
+    }
     /**
      * Remove the specified resource from storage.
      *

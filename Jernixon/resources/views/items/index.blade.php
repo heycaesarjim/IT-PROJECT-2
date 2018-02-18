@@ -171,11 +171,11 @@ class="active"
                         type:'POST',
                         url:'/items',
                         dataType:'json',
-                     /*   data:{
-                            'description':'sampleDescrp',
-                            'quantityInStock':'sampleQIS',
-                            'wholeSalePrice':'sampleWSP',
-                            'retailPrice':'sampleRP'
+                      /*  data:{
+                            'description':'',
+                            'quantityInStock':4,
+                            'wholeSalePrice':10,
+                            'retailPrice':15,
                         },
                     */
                         //data:{data},
@@ -187,7 +187,7 @@ class="active"
                                           .addClass("alert-success")
                                           .html("<h1>Success</h1>");
                                           document.getElementById("formAddNewItem").reset();
-                            //alert(data)
+
                         },
                         error:function(data){
                             var response = data.responseJSON;
@@ -205,7 +205,7 @@ class="active"
                             
                         }
                     })
-                    
+                   
                 })
 
 
