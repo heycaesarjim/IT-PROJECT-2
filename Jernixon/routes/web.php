@@ -20,6 +20,7 @@ Route::get('/employees', 'PagesController@employees');
 
 Route::Post('items/addQuantity','ItemsController@addQuantity');
 Route::Post('items/subtractQuantity','ItemsController@subtractQuantity');
+Route::Post('items/returnItem','ItemsController@returnItem');
 Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems');
 Route::resource('items','ItemsController');
 

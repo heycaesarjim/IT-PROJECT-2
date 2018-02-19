@@ -32,6 +32,7 @@
                                     sixthCell.innerHTML = "<td><button class='btn btn-success' onclick='addItemToCart(this)'>Add</button></td>";
                                 }
                             }
+                            
                         }
                 });
         }

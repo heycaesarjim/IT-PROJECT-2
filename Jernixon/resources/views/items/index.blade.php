@@ -163,52 +163,93 @@ class="active"
                 }
             });
     
-                $('#formAddNewItem').on('submit',function(e){
-                    e.preventDefault(); //prevent the page to load when submitting form
-                    //key value pair of form
-                    var data = $(this).serialize();
-                    $.ajax({
-                        type:'POST',
-                        url:'/items',
-                        dataType:'json',
-                      /*  data:{
-                            'description':'',
-                            'quantityInStock':4,
-                            'wholeSalePrice':10,
-                            'retailPrice':15,
-                        },
-                    */
-                        //data:{data},
-                        data:data,
-                            //_token:$("#_token"),
-                        success:function(data){
-                            $("#errorDivAddNewItem p").remove();
-                            $("#errorDivAddNewItem").removeClass("alert-danger hidden")
-                                          .addClass("alert-success")
-                                          .html("<h1>Success</h1>");
-                                          document.getElementById("formAddNewItem").reset();
+            $('#formAddNewItem').on('submit',function(e){
+                e.preventDefault(); //prevent the page to load when submitting form
+                //key value pair of form
+                var data = $(this).serialize();
+                $.ajax({
+                    type:'POST',
+                    url:'/items',
+                    dataType:'json',
+                    /*  data:{
+                        'description':'',
+                        'quantityInStock':4,
+                        'wholeSalePrice':10,
+                        'retailPrice':15,
+                    },
+                */
+                    //data:{data},
+                    data:data,
+                        //_token:$("#_token"),
+                    success:function(data){
+                        $("#errorDivAddNewItem p").remove();
+                        $("#errorDivAddNewItem").removeClass("alert-danger hidden")
+                                        .addClass("alert-success")
+                                        .html("<h1>Success</h1>");
+                                        document.getElementById("formAddNewItem").reset();
 
-                        },
-                        error:function(data){
-                            var response = data.responseJSON;
-                            $("#errorDivAddNewItem").removeClass("hidden").addClass("alert-danger");
-                            $("#errorDivAddNewItem").html(function(){
-                                var addedHtml="";
-                                for (var key in response.errors) {
-                                    addedHtml += "<p>"+response.errors[key]+"</p>";
-                                }
-                                return addedHtml;
-                            });
-                           // document.getElementById("insertError").innerHTML = "<p>"+error.errors['description']+"</p>"
-                            //alert(Object.keys(error.errors).length)
-                            //console.log(error)
-                            
-                        }
-                    })
-                   
+                    },
+                    error:function(data){
+                        var response = data.responseJSON;
+                        $("#errorDivAddNewItem").removeClass("hidden").addClass("alert-danger");
+                        $("#errorDivAddNewItem").html(function(){
+                            var addedHtml="";
+                            for (var key in response.errors) {
+                                addedHtml += "<p>"+response.errors[key]+"</p>";
+                            }
+                            return addedHtml;
+                        });
+                        // document.getElementById("insertError").innerHTML = "<p>"+error.errors['description']+"</p>"
+                        //alert(Object.keys(error.errors).length)
+                        //console.log(error)
+                        
+                    }
                 })
+                
+            })
 
+            $('#formReturnItem').on('submit',function(e){
+                e.preventDefault(); //prevent the page to load when submitting form
+                //key value pair of form
+                var data = $(this).serialize();
 
+                $.ajax({
+                    type:'POST',
+                    url:'/items/returnItem',
+                    //dataType:'json',
+                    data:data,
+                    success:function(dataReceive){
+                        $("#errorDivReturnItem p").remove();
+                        //$("#errorDivReturnItem").removeClass("alert-danger hidden")
+                        $("#errorDivReturnItem").removeClass("alert-danger")
+                                                .addClass("alert-success")
+                                                .html("<h1>Success</h1>");
+
+                        $("#errorDivReturnItem").css("display:block");
+                        $("#errorDivReturnItem").slideDown("slow",function(){
+                            document.getElementById("formReturnItem").reset();
+                        })
+                        .delay(1000)                        
+                        .hide(1500);
+                    },
+                    error:function(dataReceived){
+                        var response = dataReceived.responseJSON;
+                        $("#errorDivReturnItem").removeClass("alert-success")
+                                                .addClass("alert-danger"); 
+                        $("#errorDivReturnItem").css("display:block");
+                        $("#errorDivReturnItem").slideDown("slow")                                               
+                                                .html(function(){
+                                                    var addedHtml="";
+                                                    for (var key in response.errors) {
+                                                        addedHtml += "<p>"+response.errors[key]+"</p>";
+                                                    }
+                                                    return addedHtml;
+                        });
+                    
+                    }
+                })
+                
+            })
         });
     </script>
     @endsection
@@ -445,7 +486,10 @@ class="active"
             <div class = "modal-content">
                 <div class = "modal-body">
                     <button class="close" data-dismiss="modal">&times;</button>
-                    <h4>Return of Item</h4>          
+                    <h4>Return of Item</h4>   
+                    <div class="alert" style="display:none" id="errorDivReturnItem">
+                     
+                    </div>
                     <div class="row">
                         <div class="col-md-3">
                             <label><i class = "ti-search"></i> Search</label>
@@ -467,64 +511,92 @@ class="active"
                     </table>
                     
                     <div id="returnFormDiv" style="display:none">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Customer Name:</label>
+                        {!! Form::open(['method'=>'post','id'=>'formReturnItem']) !!}
+                             {{--  <div class="col-md-3">
+                               {{Form::label('description', 'Description:')}}
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control border-input" form="returnform" placeholder="Customer Name">
+                                {{Form::text('description','',['class'=>'form-control','placeholder'=>'Description'])}}
+                            </div>  --}}
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{--  <label>Customer Name:</label>  --}}
+                               {{Form::label('customerName', 'Customer Name:')}}
+                                
+                            </div>
+                            <div class="col-md-9">
+                                {{--  <input type="text" class="form-control border-input" form="returnform" placeholder="Customer Name">  --}}
+                                {{Form::text('customerName','',['class'=>'form-control','placeholder'=>'Customer Name'])}}
+                                
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Item:</label>
+                                {{--  <label>Item:</label>  --}}
+                               {{Form::label('itemName', 'Item:')}}                                
                             </div>
                             <div class="col-md-9">
-                                <input id="returnItemName" type="text" class="form-control border-input" disabled>
+                                {{--  <input id="returnItemName" type="text" class="form-control border-input" disabled>  --}}
+                                {{Form::text('itemName','',['class'=>'form-control','id'=>'itemName'])}}
+                                
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Quantity:</label>
+                                {{--  <label>Quantity:</label>  --}}
+                               {{Form::label('quantity', 'Quantity:')}}                                                                
                             </div>
                             <div class="col-md-9">
-                                <input type="number" form="returnform" class="form-control border-input" min="0">
+                                {{--  <input type="number" form="returnform" class="form-control border-input" min="0">  --}}
+                                {{Form::number('quantity','',['class'=>'form-control border-input','min'=>'0'])}}                                
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Total price:</label>
+                                {{--  <label>Total price:</label>  --}}
+                               {{Form::label('totalPrice', 'Total price:')}}                                                                                                
                             </div>
                             <div class="col-md-9">
-                                <input type="number" form="returnform" class="form-control border-input" min="0">
+                                {{--  <input type="number" form="returnform" class="form-control border-input" min="0">  --}}
+                                {{Form::number('totalPrice','',['class'=>'form-control border-input','min'=>'0'])}}                                                                
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Reason:</label>                                            
+                                {{--  <label>Reason:</label>--}}
+                               {{Form::label('reason', 'Reason:')}}                                                                                                                                
                             </div>
                             <div class="col-md-9">
-                                <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>
+                                {{--  <textarea class="form-control" form="returnform" rows="4" id="comment"></textarea>  --}}
+                                {{--  {{ Form::textarea('reason', null, ['size' => '30x5']) }}  --}}
+                                {{--  <textarea name="notes" cols="30" rows="5"></textarea>  --}}
+                                {{ Form::textarea('reason',null,['class'=>'form-control','placeholder'=>'Enter reason']) }}
+                                {{--  {{Form::text('reason','',['class'=>'form-control'])}}                                  --}}
+                            
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Status:</label>                                            
+                            {{--  <label>Status:</label>  --}}
+                            {{Form::label('status', 'Status:')}}                                                                                                                                                            
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" form="returnform" name="status">
+                                {{--  <input type="text" class="form-control" form="returnform" name="status">  --}}
+                                {{Form::text('status','',['class'=>'form-control'])}}                                
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="text-right">                                           
                                 <div class="col-md-12">                                                    
-                                    <input type="submit" name="Save" onclick="window.alert('to be continue..')" value="Save" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                     <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                 </div>                             
                             </div>
                         </div>
+                        {!! Form::close() !!}
+                        
                     </div>
                 </div>
             </div>

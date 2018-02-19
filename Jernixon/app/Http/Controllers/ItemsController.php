@@ -76,7 +76,8 @@ class ItemsController extends Controller
         // $item = DB::select("SELECT * from products where product_id=$id");
         $item = Product::where('description','LIKE','%'.$id.'%')
                     ->orderBy('description','asc')
-                    ->get();
+                    ->paginate(2);
+                   // ->get();
         return $item;
     }
 
@@ -109,12 +110,25 @@ class ItemsController extends Controller
         //dd=(json_decode($request->getContent(), true));
         //$data = $request->json()->all();
         return "pending query...";
-       // $item = DB::select("update product set _='$request->input('inputValue')'");
+       // $item = DB::select("UPDATE product set _='$request->input('inputValue')'");
     }
 
     public function subtractQuantity(Request $request){
-        
+       // $item = DB::select("");        
         return "pending query...";        
+    }
+    public function returnItem(Request $request){
+        $this->validate($request,[
+            'customerName' => 'required',
+            'itemName' => 'required',
+            'quantity' => 'required',
+            'totalPrice' => 'required',
+            'reason' => 'required',
+            'status' => 'required'
+        ]);
+       // $item = DB::select("");
+
+        return "pending query for return item...";        
     }
     /**
      * Remove the specified resource from storage.

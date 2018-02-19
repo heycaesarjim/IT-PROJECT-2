@@ -89,16 +89,16 @@
                                     secondCell.innerHTML = "<td>?</td>";
                                     var thirdCell = newRow.insertCell(-1);
                                     //sixthCell.innerHTML = "<td><button type='submit' value='Submit' form='form" +data[i].product_id+"'"+">Submit</button></td>";
-                                    thirdCell.innerHTML = "<td><button class='btn btn-danger' onclick='displayForm(this)'>Return</button></td>";
+                                    thirdCell.innerHTML = "<td><button class='btn btn-danger' onclick='displayReturnForm(this)'>Return</button></td>";
                                 }
                             }else if(button.id === "removeItem"){
                                 $("#removeItemTbody tr").remove();   
                                 if(data.length === 0){
                                     var thatTable = document.getElementById("removeItemTbody");
-                                        var newRow = thatTable.insertRow(-1);
-                                            //newRow.setAttribute("align","center");
-                                        var noResult = newRow.insertCell(-1);
-                                        noResult.innerHTML = "<td col='6' style='align:center'><h3 >No item found.</h3></td>";
+                                    var newRow = thatTable.insertRow(-1);
+                                    //newRow.setAttribute("align","center");
+                                    var noResult = newRow.insertCell(-1);
+                                    noResult.innerHTML = "<td col='6' style='align:center'><h3 >No item found.</h3></td>";
                                 }else{
                                     for(var i=0; i < data.length; i++){
                                         var thatTable = document.getElementById("removeItemTbody");
@@ -120,7 +120,7 @@
                                 }
                             }
                             
-            
+                            
                         }
                     });
                     
@@ -155,10 +155,10 @@
                     }
                     
                 }
-                function displayForm(button){
+                function displayReturnForm(button){
                     $("#returnFormDiv").css("display:block");
                     $("#returnFormDiv").slideDown("slow",function(){
-                        document.getElementById("returnItemName").value = button.parentNode.previousSibling.previousSibling.innerHTML;
+                        //document.getElementById("itemName").value = button.parentNode.previousSibling.previousSibling.innerHTML;
                     });
                     
                 }
@@ -189,7 +189,7 @@
                     var itemId = button.getAttribute("data-sq-id");
                     var inputQuantity = $("#subtractQuantityTbody tr td:eq(3) input").val(); //third td element in the tr
                     var inputReason = $("#subtractQuantityTbody tr td:eq(6) select").val();
-            
+                    
                     $.ajax({
                         type:'POST',
                         url:'items/subtractQuantity',
@@ -209,7 +209,7 @@
                             alert(dataReceived)
                         }
                     })
-                   
+                    
                 }
                 /*function displayItem(a){
                     var description = a.parentNode.previousSibling.previousSibling.innerHTML;
