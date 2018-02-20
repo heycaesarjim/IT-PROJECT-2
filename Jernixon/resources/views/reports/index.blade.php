@@ -3,6 +3,19 @@
 class="active"
 @endsection
 @section('headScript')
+	<!--jquery-->
+<script src="{{asset('assets/js/jquery-1.12.4.js')}}" type="text/javascript"></script>
+	<!--plugin DataTable-->
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+{{--  <link href="{{asset('assets/css/jquery.dataTables.css')}}" rel="stylesheet"/>  --}}
+
+
+<link href="{{asset('assets/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
+<link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet"/>
+<script src="{{asset('assets/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/js/pdfmake.min.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("#transactionDTButton").click(function(){
@@ -13,14 +26,16 @@ class="active"
                     "destroy": true,
                     "processing": true,
                     "serverSide": true,
-                    "colReorder": true,   
+                    "colReorder": true,  
                     "ajax":  "{{ route('reports.getTransactions') }}",
                     "columns": [
-                    {data: 'description'},
-                    {data: 'price'},
-                    {data: 'created_at'},
-                    {data: 'updated_at'},
-                    ]
+                        {data: 'description'},
+                        {data: 'price'},
+                        {data: 'created_at'},
+                        {data: 'updated_at'},
+                        ],
+                        dom: 'Bfrtip',
+                        buttons: ['excel', 'pdf','print'], 
                 });
             });
             $("#transactionDiv").attr("style","display:block");            
@@ -41,7 +56,9 @@ class="active"
                     {data: 'price'},
                     {data: 'created_at'},
                     {data: 'updated_at'},
-                    ]
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: ['excel', 'pdf','print'], 
                 });
                 
             });
@@ -62,7 +79,9 @@ class="active"
                     {data: 'price'},
                     {data: 'created_at'},
                     {data: 'updated_at'},
-                    ]
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: ['excel', 'pdf','print'], 
                 });
                 
             });            
@@ -84,7 +103,9 @@ class="active"
                     {data: 'price'},
                     {data: 'created_at'},
                     {data: 'updated_at'},
-                    ]
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: ['excel', 'pdf','print'], 
                 });
                 
             });            
@@ -245,8 +266,7 @@ class="active"
 
 @section('js_link')
 <!--   Core JS Files   -->
-<script src="{{asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
+{{--  <script src="{{asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>  --}}
 <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 
 @endsection

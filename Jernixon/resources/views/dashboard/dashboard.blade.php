@@ -4,12 +4,14 @@
 @endsection
 
 @section('headScript')
+<link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet"/>
+<link href="{{asset('assets/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
     <script>
         function searchItem(a){
             $.ajax({
                     method: 'get',
                     //url: 'items/' + document.getElementById("inputItem").value,
-                    url: 'items/' + a.value,
+                    url: 'dashboard/' + a.value,
                     dataType: "json",
                         success: function(data){
                             if(a.id === "dashboardSearchItem"){
@@ -36,8 +38,14 @@
                         }
                 });
         }
-        function addItemToCart(a){
-            var data  = $(a.parentNode.parentNode.innerHTML).slice(0,-1);
+        function addItemToCart(button){
+            $(button).hide(500).delay(1000);
+            //$(button).removeClass("btn-info").addClass("btn-danger");
+           // $(button i).remove()
+            //.show(500);
+            //.html("<button class='btn btn-danger' onclick='addItemToCart(this)'>Remove</button>")
+    
+            var data  = $(button.parentNode.parentNode.innerHTML).slice(0,-1);
              var thatTbody = document.getElementById("cartTbody");
              var newRow = thatTbody.insertRow(-1);
              //newTr.innerHTML = a.parentNode.parentNode.innerHTML ;
@@ -53,7 +61,9 @@
             //var i = a.parentNode.parentNode.rowIndex;
             //document.getElementById("cartTable").deleteRow(i);
             var row = button.parentNode.parentNode; //row
-            $(row).hide(1000);     
+            $(row).hide(500,function(){
+                $(row).remove();
+            });
                    
         }
     </script>
@@ -105,15 +115,18 @@
                                         <div class="row">
                                             <div class="col col-xs-5">
                                                 <label><i class = "ti-search"></i> Search</label>
-                                                <input type="text" onkeyup="searchItem(this)" id="dashboardSearchItem" class="form-control border-input" placeholder="Enter the name of the item">
+                                                {{--  <input type="text" onkeyup="searchItem(this)" id="dashboardSearchItem" class="form-control border-input" placeholder="Enter the name of the item">  --}}
+                                                <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
                                             </div>
                                             <div class="col col-xs-7 text-right">
-                                                    <a href = "#openCart" data-toggle="modal" class="btn btn-lg btn-primary btn-create"><i class = "fa fa-shopping-cart"></i></a>
+                                                    <a href = "#openCart" data-toggle="modal" class="btn btn-lg btn-primary btn-create"><i class = "fa fa-shopping-cart"></i>
+                                                        {{--  <button id="#openCart" data-toggle="modal" class='btn btn-lg btn-primary fa fa-shopping-cart '></button>  --}}
+                                                    </a>
                                             </div>
                                         </div>
                                     </div>
 
-                                  <table class="table table-hover table-condensed" style="width:100%">
+                                  <table class="table table-hover table-condensed" style="width:100%" id="dashboardDatatable">
                                     <thead> 
                                         <tr>
                                             <th>Id</th>
@@ -124,7 +137,8 @@
                                             <th>Add to Cart</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="dashboardDatatable">
+                                    {{--  <tbody id="dashboardDatatable">  --}}
+                                    <tbody>
 
                                     </tbody>
                                   </table>
@@ -210,7 +224,7 @@
                             </div>
                             <div class="text-right">                                           
                                 <div class="col-md-4">                                                    
-                                    <button class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-primary" onclick="window.alert('to be continue..')">Submit</button>
                                     <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                 </div>                             
                             </div>
@@ -221,29 +235,39 @@
      </div>
 </div>
 @endsection
-{{--  @section('jqueryScript')
+@section('jqueryScript')
     <script type="text/javascript">
         $(document).ready(function() {
             
              $('#dashboardDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax":  "{{ route('dashboardItems.getItems') }}",
+                "ajax":  "{{ route('dashboard.getItems') }}",
                 "columns": [
+                    {data: 'product_id'},
                     {data: 'description'},
                     {data: 'price'},
                     {data: 'created_at'},
                     {data: 'updated_at'},
-                ]
+                    {data: 'action'},
+                  //  {data: 'created_at'},
+                    //{data: 'updated_at'},
+                ],
+				//responsive: true,                
+			    //keys: true           
+                //dom: 'Bfrtip',
+                //buttons: ['excel', 'pdf','print'],
             });
 
         });
     </script>
-@endsection  --}}
+@endsection
 @section('js_link')
 <!--   Core JS Files   -->
-<script src="{{asset('assets/js/jquery-1.10.2.js')}}"></script>
+{{--  <script src="{{asset('assets/js/jquery-1.10.2.js')}}"></script>  --}}
+<script src="{{asset('assets/js/jquery-1.12.4.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-{{--  <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>  --}}
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/dataTables.buttons.min.js')}}"></script>
 
 @endsection

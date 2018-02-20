@@ -12,15 +12,15 @@
             
         {{--  <link rel="stylesheet" href="{{asset('css/app.css')}}">  --}}
         <!-- Animation library for notifications   -->
-        <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
+        {{--  <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>  --}}
         <!--  Paper Dashboard core CSS    -->
         <link href="{{asset('assets/css/paper-dashboard.css')}}" rel="stylesheet"/>
         <!--  Fonts and icons     -->
         <link href="{{asset('css/app.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/css/fonts.css')}}" rel='stylesheet' type='text/css'>
-        <link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">
+         <link href="{{asset('assets/css/fonts.css')}}" rel='stylesheet' type='text/css'>
+        {{--  <link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">  --}}
         <!-- tab style -->
-        <link href="{{asset('assets/css/tab.css')}}" rel="stylesheet">
+        {{--  <link href="{{asset('assets/css/tab.css')}}" rel="stylesheet">  --}}
        
         <link rel="stylesheet" href="{{asset('assets/css/bootstrapv3.3.7.css')}}">
         {{--  <link href="{{asset('assets/bootstrap-4/css/bootstrap.min.css')}}" rel="stylesheet">  --}}

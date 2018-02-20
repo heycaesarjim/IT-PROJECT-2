@@ -3,14 +3,11 @@
 @section('items_link')
 class="active"
 @endsection
-{{--  @section('headScripts')
-<script type="text/javascript">
-    $(document).ready(function() {
 
+@section('headScript')
+<link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet"/>
 
-    });
-</script>
-@endsection  --}}
+@endsection
 
 @extends('inc.headScripts')
 @section('right')
@@ -154,6 +151,7 @@ class="active"
                 {data: 'price'},
                 {data: 'created_at'},
                 {data: 'updated_at'},
+                {data: 'action'},
                 ]
             });
             
@@ -646,7 +644,8 @@ class="active"
     @section('js_link')
     <!--   Core JS Files   -->
     
-    <script src="{{asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    {{--  <script src="{{asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>  --}}
+    <script src="{{asset('assets/js/jquery-1.12.4.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
     

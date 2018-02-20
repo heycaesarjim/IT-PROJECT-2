@@ -25,6 +25,24 @@ class ItemsController extends Controller
 
         $data = DB::table('products')->select('*');
         return Datatables::of($data)
+            ->addColumn('action',function($data){
+                return "<a href = '#addquan' data-toggle='modal' >
+                    <button class='btn btn-success'><i class='glyphicon glyphicon-plus-sign'></i> Add</button>
+                </a>
+                <a href = '#subtract' data-toggle='modal' >
+                    <button class='btn btn-info'><i class='glyphicon glyphicon-minus-sign'></i> Subtract</button>
+                </a>
+                <a href = '#return' data-toggle='modal' >
+                    <button class='btn btn-danger'><i class='glyphicon glyphicon-backward'></i> Return</button>
+                </a>
+                <a href = '#remove' data-toggle='modal' >
+                    <button class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i> Remove Item</button>
+                </a>
+                
+                ";
+    
+            
+                })
             ->make(true);
     }
     /**
@@ -76,8 +94,8 @@ class ItemsController extends Controller
         // $item = DB::select("SELECT * from products where product_id=$id");
         $item = Product::where('description','LIKE','%'.$id.'%')
                     ->orderBy('description','asc')
-                    ->paginate(2);
-                   // ->get();
+                    //->paginate(2);
+                    ->get();
         return $item;
     }
 

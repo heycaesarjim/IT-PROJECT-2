@@ -15,8 +15,10 @@ Route::get('/', 'PagesController@index');
 // Route::get('/dashboard', 'PagesController@dashboard');
 //dataTable for dashboard
 //Route::get('/dashboard/getItems', 'DashboardController@getItems')->name('dashboardItems.getItems');
+
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/employees', 'PagesController@employees');
+Route::get('/dashboard/getItems', 'DashboardController@getItems')->name('dashboard.getItems');
+// Route::get('/dashboard/{someData}', 'DashboardController@show')->name('dashboard.show');
 
 Route::Post('items/addQuantity','ItemsController@addQuantity');
 Route::Post('items/subtractQuantity','ItemsController@subtractQuantity');
@@ -29,6 +31,8 @@ Route::get('/reports/getReturns', 'ReportsController@getReturns')->name('reports
 Route::get('/reports/getItemsAdded', 'ReportsController@getItemsAdded')->name('reports.getItemsAdded');
 Route::get('/reports/getRemovedItems', 'ReportsController@getRemovedItems')->name('reports.getRemovedItems');
 Route::resource('reports', 'ReportsController');
+
+Route::get('/employees', 'PagesController@employees');
 
 //Route::get('/items/{id}', 'ItemsController@show');
 
