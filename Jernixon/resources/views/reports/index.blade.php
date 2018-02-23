@@ -3,18 +3,23 @@
 class="active"
 @endsection
 @section('headScript')
+
 	<!--jquery-->
 <script src="{{asset('assets/js/jquery-1.12.4.js')}}" type="text/javascript"></script>
 	<!--plugin DataTable-->
 <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 {{--  <link href="{{asset('assets/css/jquery.dataTables.css')}}" rel="stylesheet"/>  --}}
 
-
-<link href="{{asset('assets/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
 <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet"/>
+
 <script src="{{asset('assets/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('assets/js/buttons.print.min.js')}}"></script>
+<link href="{{asset('assets/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
+<script src="{{asset('assets/js/buttons.html5.min.js')}}"></script>
+{{--  pdf  --}}
 <script src="{{asset('assets/js/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/js/buttons.print.min.js')}}"></script>
+{{--  <script src="{{asset('assets/js/vfs_fonts.js')}}"></script>  --}}
+<script src="{{asset('assets/js/buttons.flash.min.js')}}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -27,15 +32,17 @@ class="active"
                     "processing": true,
                     "serverSide": true,
                     "colReorder": true,  
+                    //"autoWidth": true,
+                    "pagingType": "full_numbers",
+                    dom: 'Bfrtip',
+                    buttons: ['excel', 'pdf','print'], 
                     "ajax":  "{{ route('reports.getTransactions') }}",
                     "columns": [
                         {data: 'description'},
                         {data: 'price'},
                         {data: 'created_at'},
                         {data: 'updated_at'},
-                        ],
-                        dom: 'Bfrtip',
-                        buttons: ['excel', 'pdf','print'], 
+                        ]
                 });
             });
             $("#transactionDiv").attr("style","display:block");            
@@ -49,7 +56,8 @@ class="active"
                     "processing": true,
                     "serverSide": true,
                     "destroy": true,
-                    "colReorder": true,   
+                    "colReorder": true, 
+                    "pagingType": "full_numbers",  
                     "ajax":  "{{ route('reports.getReturns') }}",
                     "columns": [
                     {data: 'description'},
@@ -72,7 +80,8 @@ class="active"
                     "processing": true,
                     "serverSide": true,
                     "destroy": true,
-                    "colReorder": true,   
+                    "colReorder": true, 
+                    "pagingType": "full_numbers",  
                     "ajax":  "{{ route('reports.getItemsAdded') }}",
                     "columns": [
                     {data: 'description'},
@@ -96,7 +105,8 @@ class="active"
                     "processing": true,
                     "serverSide": true,
                     "destroy": true,
-                    "colReorder": true,   
+                    "colReorder": true, 
+                    "pagingType": "full_numbers",  
                     "ajax":  "{{ route('reports.getRemovedItems') }}",
                     "columns": [
                     {data: 'description'},

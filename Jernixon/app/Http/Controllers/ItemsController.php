@@ -26,17 +26,18 @@ class ItemsController extends Controller
         $data = DB::table('products')->select('*');
         return Datatables::of($data)
             ->addColumn('action',function($data){
-                return "<a href = '#addquan' data-toggle='modal' >
-                    <button class='btn btn-success'><i class='glyphicon glyphicon-plus-sign'></i> Add</button>
+                return "<a href = '#addModal' data-toggle='modal'>
+                    <button id='Add' class='btn btn-success' onclick='insertDataToModal(this)'><i class='glyphicon glyphicon-plus-sign'></i> Add</button>
                 </a>
-                <a href = '#subtract' data-toggle='modal' >
-                    <button class='btn btn-info'><i class='glyphicon glyphicon-minus-sign'></i> Subtract</button>
+                <a href = '#subtractModal' data-toggle='modal' >
+                    <button id='Subtract'class='btn btn-danger' onclick='insertDataToModal(this)'><i class='glyphicon glyphicon-minus-sign'></i> Subtract</button>
                 </a>
-                <a href = '#return' data-toggle='modal' >
-                    <button class='btn btn-danger'><i class='glyphicon glyphicon-backward'></i> Return</button>
+
+                <a href = '#removeModal' data-toggle='modal' >
+                    <button id='Remove' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i> Remove Item</button>
                 </a>
-                <a href = '#remove' data-toggle='modal' >
-                    <button class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i> Remove Item</button>
+                <a href = '#editModal' data-toggle='modal' >
+                    <button id='Edit' class='btn btn-info' onclick='insertDataToModal(this)'><i class='glyphicon glyphicon-edit'></i>Edit</button>
                 </a>
                 
                 ";

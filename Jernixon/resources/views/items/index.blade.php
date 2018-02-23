@@ -53,14 +53,14 @@ class="active"
                         <div class = "content">
                             <form class = "form-inline">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    {{--  <div class="col-md-12">
                                         <label><i class = "ti-search"></i> Search</label>
-                                        <input type="text" class="form-control border-input" placeholder="Enter name of item">
-                                    </div>
+                                        <input type="text" onkeyup="searchItem2(this)" class="form-control border-input" placeholder="Enter name of item">
+                                    </div>  --}}
                                 </div>
                             </form>
                             <div class="row">
-                                <div class="col-md-6">
+                                {{--  <div class="col-md-6">
                                     <ul class="nav nav-pills">
                                         <li >
                                             <a href = "#addquan" data-toggle="modal"   >Add</a>
@@ -72,16 +72,19 @@ class="active"
                                             <a href = "#return" data-toggle="modal"  >Return</a>
                                         </li>                                                      
                                     </ul>
-                                </div>
+                                </div>  --}}
                                 
                                 {{--  <div class="col-md-6">  --}}
                                     <div class = "text-right">
-                                        <a href = "#addnew" data-toggle="modal" >
+                                        <a href = "#addNewItemModal" data-toggle="modal" >
                                             <button type="submit" class="btn btn-info btn-fill btn-wd btn-success"><i class = "ti-plus"></i> Add new item</button> 
-                                        </a>        
-                                        <a href = "#remove" data-toggle="modal">
+                                        </a>  
+                                        <a href = '#returnModal' data-toggle='modal' >
+                                            <button id='Return' class='btn btn-danger'><i class='glyphicon glyphicon-backward'></i> Return</button>
+                                        </a>      
+                                        {{--  <a href = "#remove" data-toggle="modal">
                                             <button type="submit" class="btn btn-info btn-fill btn-wd btn-danger"><i class="ti-minus"></i> Remove item</button>
-                                        </a>                                            
+                                        </a>                                              --}}
                                     </div>
                                 </div>
                             </div>
@@ -93,6 +96,7 @@ class="active"
                             <table id="tableItems" class="table table-hover table-condensed" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>created_at</th>
@@ -124,6 +128,30 @@ class="active"
     
     @section('jqueryScript')
     <script type="text/javascript">
+
+        function insertDataToModal(button){
+            var data  = $(button.parentNode.parentNode.parentNode.innerHTML).slice(1,-1);
+            var formId = "form"+button.id;
+            
+            if(button.id === "Edit"){
+                $("#"+formId +" input")[1].value=data[0].innerHTML;
+                // $("#"+formId +" input")[2].value=data[1].innerHTML;
+                $("#"+formId +" input")[3].value=data[1].innerHTML;
+                $("#"+formId +" input")[4].value=data[2].innerHTML;
+                // $("#"+formId +" input")[5].value=data[0].innerHTML;
+                // $("#"+formId +" input")[6].value=data[2].innerHTML;
+                return;
+            }
+
+            $("#"+formId +" input")[1].value=data[0].innerHTML;
+            // $("#"+formId +" input")[2].value=data[1].innerHTML;
+            // $("#"+formId +" input")[3].value=data[0].innerHTML;
+            $("#"+formId +" input")[4].value=data[1].innerHTML;
+            $("#"+formId +" input")[5].value=data[2].innerHTML;
+            // $("#"+formId +" input")[6].value=data[2].innerHTML;
+
+
+        }
         $(document).ready(function() {
             //alert(document.querySelectorAll("#removeItemTbody tr>td:last-child button").length);
 
@@ -145,8 +173,10 @@ class="active"
             $('#tableItems').DataTable({
                 "processing": true,
                 "serverSide": true,
+                "pagingType": "full_numbers",
                 "ajax":  "{{ route('items.getItems') }}",
                 "columns": [
+                {data: 'product_id'},
                 {data: 'description'},
                 {data: 'price'},
                 {data: 'created_at'},
@@ -253,7 +283,7 @@ class="active"
     @endsection
     
     @section('modals')
-    <div id="addnew" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+    <div id="addNewItemModal" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
         <div class = "modal-dialog">
             <div class = "modal-content">
                 <div class = "modal-body">
@@ -324,15 +354,90 @@ class="active"
         </div>
         
     </div>
-    <div id="addquan" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-        <div class = "modal-dialog modal-lg">
+    <div id="addModal" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+        <div class = "modal-dialog modal-md">
             <div class = "modal-content">
                 <div class = "modal-body">
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4> Add Quantity</h4>
-                    <label><i class = "ti-search"></i> Search</label>
-                    <input type="text" onkeyup="searchItem2(this)" id="addQuantity" class="form-control border-input" placeholder="Enter the name of the item">
-                    <div class="table-responsive">
+                    {!! Form::open(['method'=>'post','id'=>'formAdd']) !!}
+                        <div class="form-group">
+                            {{--  <div class="row">
+                                <div class="col-md-3">
+                                    {{Form::label('id', 'Id:')}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{Form::text('id','',['class'=>'form-control','disabled'])}}
+                                </div>
+                            </div>  --}}
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{Form::label('description', 'Description:')}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{Form::text('description','',['class'=>'form-control','disabled'])}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">                                
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{Form::label('Quantity in stock:')}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{ Form::number('quantityInStock','',['class'=>'form-control','placeholder'=>'?','disabled']) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">    
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{Form::label('Quantity', 'Quantity:')}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{Form::number('Quantity','',['class'=>'form-control','min'=>'1'])}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">    
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{Form::number('wholeSalePrice','',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1','disabled'])}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <div class="row">
+                                <div class="col-md-3">                                                             
+                                    {{Form::label('Retail Price', 'Retail Price:')}}
+                                </div>
+                                <div class="col-md-9">                                    
+                                    {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'?','disabled'])}}
+                                </div>
+                            </div>
+                        </div>
+                        @include('inc.messages')
+                    {{--  </form>  --}}
+                    {{--  <div class="modal-footer">  --}}
+                        <div class="row">
+                            <div class="text-right">                                           
+                                <div class="col-md-12">   
+                                    {{--  {{Form::submit('Submit',['class'=>'btn btn-primary'])}}  --}}
+                                    <button id="submitAddQuantity" type="submit" class="btn btn-success">Save</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        {{--  </div>                      --}}
+                        {!! Form::close() !!}
+                    {{--  <label><i class = "ti-search"></i> Search</label>
+                    <input type="text" onkeyup="searchItem2(this)" id="addQuantity" class="form-control border-input" placeholder="Enter the name of the item">  --}}
+                    {{--  <div class="table-responsive">  --}}
                         {{--  <table class="table table-bordered" id="itemsTable">
                             <tr>
                                 <th>Description</th>
@@ -347,7 +452,7 @@ class="active"
                             
                         </table>
                         {{$products->links()}}  --}}
-                        <table class="table">
+                        {{--  <table class="table" id="addQuantityTable">
                             <thead>
                                 <tr>
                                     <td>Id</td>
@@ -362,95 +467,191 @@ class="active"
                             <tbody  id="addQuantityTbody">
                                 
                             </tbody>
-                        </table>
+                        </table>  --}}
+                    {{--  </div>  --}}
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div id="editModal" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+        
+        <div class = "modal-dialog modal-md">
+            <div class = "modal-content">
+                <div class = "modal-body">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4>Edit</h4>
+
                     </div>
                     
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    <div id="edit" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-        
-        <div class = "modal-dialog modal-lg">
-            
-            <div class = "modal-content">
-                
-                <div class = "modal-body">
-                    
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    
-                    <h4>Edit</h4>
-                    
-                    <form action = "" id="editform" method="post" class="ajax">
-                        
+                    {!! Form::open(['method'=>'post','id'=>'formEdit']) !!}
+                    {{--  <div class="form-group">
                         <div class="row">
-                            
-                            <div class="col-md-12">
-                                
-                                <div class="form-group">
-                                    
-                                    <label><i class = "ti-search"></i> Search</label>
-                                    <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
-                                    
-                                </div>
-                                <div class="content table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>Description</th>
-                                            <th>Quantity in Stock</th>
-                                            <th>WholeSale Price</th>
-                                            <th>Retail Price</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Item 69</td>
-                                                <td>50</td>
-                                                <td>                                                         
-                                                    <div class="form-group">
-                                                        <input type="text" form="editform" class="form-control" id="WholeSale">
-                                                    </div>                                                         
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <input type="text" form="editform" class="form-control" id="retail">
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                    
-                                </div>
-                                
+                            <div class="col-md-3">
+                                {{Form::label('id', 'Id:')}}
                             </div>
-                            <div class="text-right">                                           
-                                <div class="col-md-12">                                                    
-                                    <input type="submit" form="editform" name="submitedit" class="btn btn-primary">
-                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>                             
+                            <div class="col-md-9">
+                                {{Form::text('id','',['class'=>'form-control','disabled'])}}
                             </div>
                         </div>
-                        
-                    </form>
-                    
-                </div>
+                    </div>  --}}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('description', 'Description:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{Form::text('description','',['class'=>'form-control'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">                                
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('Quantity in stock:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::number('quantityInStock','',['class'=>'form-control','placeholder'=>'?','disabled']) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">    
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{Form::number('wholeSalePrice','',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">   
+                        <div class="row">
+                            <div class="col-md-3">                                                             
+                                {{Form::label('Retail Price', 'Retail Price:')}}
+                            </div>
+                            <div class="col-md-9">                                    
+                                {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'?'])}}
+                            </div>
+                        </div>
+                    </div>
+                    @include('inc.messages')
+                {{--  </form>  --}}
+                {{--  <div class="modal-footer">  --}}
+                    <div class="row">
+                        <div class="text-right">                                           
+                            <div class="col-md-12">   
+                                {{--  {{Form::submit('Submit',['class'=>'btn btn-primary'])}}  --}}
+                                <button id="submitAddQuantity" type="submit" class="btn btn-success">Save</button>
+                                <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{--  </div>                      --}}
+                    {!! Form::close() !!}
+
                 
+                </div>
             </div>
-            
         </div>
         
     </div>
-    <div id="subtract" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
-        <div class = "modal-dialog modal-lg">
+    <div id="subtractModal" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+        <div class = "modal-dialog modal-md">
             <div class = "modal-content">
                 <div class = "modal-body">
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4> Subtract Quantity</h4>
-                    <label><i class = "ti-search"></i> Search</label>
-                    <input type="text" onkeyup="searchItem2(this)" id="subtractQuantity" class="form-control border-input" placeholder="Enter the name of the item">
-                    <div class="table-responsive">
+                    {!! Form::open(['method'=>'post','id'=>'formSubtract']) !!}
+                    {{--  <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('id', 'Id:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{Form::text('id','',['class'=>'form-control','disabled'])}}
+                            </div>
+                        </div>
+                    </div>  --}}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('description', 'Description:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{Form::text('description','',['class'=>'form-control','disabled'])}}
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="form-group">                                
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('Quantity in stock:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::number('quantityInStock','',['class'=>'form-control','placeholder'=>'?','disabled']) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">    
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('Quantity', 'Quantity:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{Form::number('Quantity','',['class'=>'form-control','min'=>'1'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">    
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{Form::label('Whole Sale Price', 'Whole Sale Price:')}}
+                            </div>
+                            <div class="col-md-9">
+                                {{Form::number('wholeSalePrice','',['class'=>'form-control','placeholder'=>'Whole Sale Price','min'=>'1','disabled'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">   
+                        <div class="row">
+                            <div class="col-md-3">                                                             
+                                {{Form::label('Retail Price', 'Retail Price:')}}
+                            </div>
+                            <div class="col-md-9">                                    
+                                {{Form::number('retailPrice','',['class'=>'form-control','placeholder'=>'?','disabled'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">   
+                        <div class="row">
+                            <div class="col-md-3">                                                             
+                                {{Form::label('Reason', 'Reason:')}}
+                            </div>
+                            <div class="col-md-9">                                    
+                                {{ Form::textarea('reason',null,['class'=>'form-control','placeholder'=>'Enter reason']) }}
+                            </div>
+                        </div>
+                    </div>
+                    @include('inc.messages')
+                {{--  </form>  --}}
+                {{--  <div class="modal-footer">  --}}
+                    <div class="row">
+                        <div class="text-right">                                           
+                            <div class="col-md-12">   
+                                {{--  {{Form::submit('Submit',['class'=>'btn btn-primary'])}}  --}}
+                                <button id="submitSubtractQuantity" type="submit" class="btn btn-success">Save</button>
+                                <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{--  </div>                      --}}
+                    {!! Form::close() !!}
+                    {{--  <label><i class = "ti-search"></i> Search</label>  --}}
+                    {{--  <input type="text" onkeyup="searchItem2(this)" id="subtractQuantity" class="form-control border-input" placeholder="Enter the name of the item">  --}}
+                    {{--  <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -467,7 +668,7 @@ class="active"
                                 
                             </tbody>
                         </table>
-                    </div>
+                    </div>  --}}
                     
                 </div>
                 <div class="modal-footer" id="mod_footer">
@@ -479,7 +680,7 @@ class="active"
         </div>
         
     </div>
-    <div id="return" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+    <div id="returnModal" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
         <div class = "modal-dialog">
             <div class = "modal-content">
                 <div class = "modal-body">
@@ -488,7 +689,7 @@ class="active"
                     <div class="alert" style="display:none" id="errorDivReturnItem">
                      
                     </div>
-                    <div class="row">
+                    {{--  <div class="row">
                         <div class="col-md-3">
                             <label><i class = "ti-search"></i> Search</label>
                         </div>
@@ -506,10 +707,10 @@ class="active"
                         </thead>
                         <tbody  id="returnItemTbody">
                         </tbody>
-                    </table>
+                    </table>  --}}
                     
-                    <div id="returnFormDiv" style="display:none">
-                        {!! Form::open(['method'=>'post','id'=>'formReturnItem']) !!}
+                    {{--  <div id="returnFormDiv">  --}}
+                        {!! Form::open(['method'=>'post','id'=>'formReturn']) !!}
                              {{--  <div class="col-md-3">
                                {{Form::label('description', 'Description:')}}
                             </div>
@@ -535,7 +736,7 @@ class="active"
                             </div>
                             <div class="col-md-9">
                                 {{--  <input id="returnItemName" type="text" class="form-control border-input" disabled>  --}}
-                                {{Form::text('itemName','',['class'=>'form-control','id'=>'itemName'])}}
+                                {{Form::text('itemName','',['class'=>'form-control','id'=>'itemName','disabled'])}}
                                 
                             </div>
                         </div>
@@ -595,12 +796,13 @@ class="active"
                         </div>
                         {!! Form::close() !!}
                         
-                    </div>
+                    {{--  </div>  --}}
+
                 </div>
             </div>
         </div>
     </div>
-    <div id="remove" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
+    <div id="removeModal" class="modal fade" tabindex="-1" role = "dialog" aria-labelledby = "viewLabel" aria-hidden="true">
         <div class = "modal-dialog modal-lg">
             <div class = "modal-content">
                 <div class = "modal-body">
@@ -609,7 +811,8 @@ class="active"
                     <div class="alert alert-success" id="errorDivRemove" style="display:none">
                         <h1>Success</h1>
                     </div>
-                    <div class="row">
+                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                    {{--  <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-3">
                                 <label><i class = "ti-search"></i> Search</label>
@@ -618,8 +821,8 @@ class="active"
                                 <input type="text" onkeyup="searchItem2(this)" id="removeItem" class="form-control border-input" placeholder="Name of the returned item">
                             </div>
                         </div>
-                    </div>
-                    <div class="content table-responsive">
+                    </div>  --}}
+                    {{--  <div class="content table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <th>Id</th>
@@ -632,7 +835,7 @@ class="active"
                             <tbody id="removeItemTbody" >
                             </tbody>
                         </table>
-                    </div>
+                    </div>  --}}
                 </div>    
             </div>
         </div>

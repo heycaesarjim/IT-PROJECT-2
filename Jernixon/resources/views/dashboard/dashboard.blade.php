@@ -7,6 +7,7 @@
 <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet"/>
 <link href="{{asset('assets/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
     <script>
+        
         function searchItem(a){
             $.ajax({
                     method: 'get',
@@ -71,7 +72,7 @@
 
 @section('right')
 <div class="content">
-        <i><p style="color:red;font-size:20px">Items under construction!</p></i>
+        {{--  <i><p style="color:red;font-size:20px">Items under construction!</p></i>  --}}
     
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -110,38 +111,87 @@
         <div class="col-md-12" >
             <div class="card" >
                 <div class="header">
-                        <div class="row" >
-                                <div class="panel-heading">
+                        <div class="row">
+                                <div class="panel-heading" >
                                         <div class="row">
-                                            <div class="col col-xs-5">
+                                            {{--  <div class="col col-xs-5">
                                                 <label><i class = "ti-search"></i> Search</label>
-                                                {{--  <input type="text" onkeyup="searchItem(this)" id="dashboardSearchItem" class="form-control border-input" placeholder="Enter the name of the item">  --}}
+                                                <input type="text" onkeyup="searchItem(this)" id="dashboardSearchItem" class="form-control border-input" placeholder="Enter the name of the item">
                                                 <input type="text" class="form-control border-input" placeholder="Enter the name of the item">
-                                            </div>
-                                            <div class="col col-xs-7 text-right">
+                                            </div>  --}}
+                                            <div class="col col-xs-12 text-right">
                                                     <a href = "#openCart" data-toggle="modal" class="btn btn-lg btn-primary btn-create"><i class = "fa fa-shopping-cart"></i>
                                                         {{--  <button id="#openCart" data-toggle="modal" class='btn btn-lg btn-primary fa fa-shopping-cart '></button>  --}}
                                                     </a>
                                             </div>
                                         </div>
-                                    </div>
-
-                                  <table class="table table-hover table-condensed" style="width:100%" id="dashboardDatatable">
-                                    <thead> 
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Description</th>
-                                            <th>Quantity in Stock</th>
-                                            <th>Wholesale Price</th>
-                                            <th>Retail Price</th>
-                                            <th>Add to Cart</th>
-                                        </tr>
-                                    </thead>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7" >
+                                    <table class="table table-hover table-condensed" style="width:100%" id="dashboardDatatable">
+                                        <thead> 
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Description</th>
+                                                <th>Quantity in Stock</th>
+                                                <th>Wholesale Price</th>
+                                                <th>Retail Price</th>
+                                                <th>Add to Cart</th>
+                                            </tr>
+                                        </thead>
                                     {{--  <tbody id="dashboardDatatable">  --}}
-                                    <tbody>
+                                        <tbody>
 
-                                    </tbody>
-                                  </table>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div class="col-md-5" >
+                                    <h4>Customer Purchase</h4>
+                                    <div class="row">
+                                        <div class="col-md-3 text-right">
+                                            <label>Customer Name: </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control border-input" form="purchase" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 text-right">
+                                            <label>Date of Purchased</label>    
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{--  <input type="date">  --}}
+                    
+                                            <span class="add-on">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                              
+                                            </span>   
+                                        </div>
+                    
+                                    </div>
+                                    
+                                    <div class="row"> 
+                                        <div class="col-md-12 table-responsive">
+                                            <table id="cartTable" class="table table-striped table-bordered table-list">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Item</th>
+                                                        <th>Quantity Left</th>
+                                                        <th>Wholesale Price</th>
+                                                        <th>Retail Price</th>
+                                                        <th>Quantity Purchase</th>
+                                                        <th>Total Price</th>
+                                                        <th>Action</th>
+                                                    </tr> 
+                                                </thead>
+                                                <tbody id="cartTbody">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
 
                 </div>
@@ -182,10 +232,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 text-right">
-                        <label>Date of Purchased</label>
+                        <label>Date of Purchased</label>    
                     </div>
                     <div class="col-md-9">
-                        <input type="date">
+                        {{--  <input type="date">  --}}
+
                         <span class="add-on">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                           
@@ -238,10 +289,11 @@
 @section('jqueryScript')
     <script type="text/javascript">
         $(document).ready(function() {
-            
+         
              $('#dashboardDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
+                "pagingType": "full_numbers",
                 "ajax":  "{{ route('dashboard.getItems') }}",
                 "columns": [
                     {data: 'product_id'},
