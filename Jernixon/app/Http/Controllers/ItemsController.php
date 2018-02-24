@@ -25,6 +25,25 @@ class ItemsController extends Controller
 
         $data = DB::table('products')->select('*');
         return Datatables::of($data)
+            ->addColumn('action',function($data){
+                return "<a href = '#addModal' data-toggle='modal'>
+                    <button id='Add' class='btn btn-success' onclick='insertDataToModal(this)'><i class='glyphicon glyphicon-plus-sign'></i> Add</button>
+                </a>
+                <a href = '#subtractModal' data-toggle='modal' >
+                    <button id='Subtract'class='btn btn-danger' onclick='insertDataToModal(this)'><i class='glyphicon glyphicon-minus-sign'></i> Subtract</button>
+                </a>
+
+                <a href = '#removeModal' data-toggle='modal' >
+                    <button id='Remove' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i> Remove Item</button>
+                </a>
+                <a href = '#editModal' data-toggle='modal' >
+                    <button id='Edit' class='btn btn-info' onclick='insertDataToModal(this)'><i class='glyphicon glyphicon-edit'></i>Edit</button>
+                </a>
+                
+                ";
+    
+            
+                })
             ->make(true);
     }
     /**
@@ -46,18 +65,20 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-                'description' => 'required',
-                'quantityInStock' => 'required',
-                'wholeSalePrice' => 'required',
-                'retailPrice' => 'required'
+                    'description' => 'required',
+                    'quantityInStock' => 'required',
+                    'wholeSalePrice' => 'required',
+                    'retailPrice' => 'required'
         ]);
-        return "hahaha";
-        // $item = new Product;
-        // $item->description = $request->input('description');
-        // $item->quantityInStock = $request->input('quantityInStock');
-        // $item->wholeSalePrice = $request->input('wholeSalePrice');
-        // $item->retailPrice = $request->input('retailPrice');
-        // $item->save();
+
+        //Create new Item
+        $item = new Product;
+        $item->description = $request->input('description');
+        //$item->quantityInStock = $request->input('quantityInStock');
+        $item->price = $request->input('wholeSalePrice');
+        //$item->retailPrice = $request->input('retailPrice');
+        $item->save();
+        return response($request->all());
         // return "success";
        // return redirect('/items')->with('success','Success adding item');
     }
@@ -74,6 +95,7 @@ class ItemsController extends Controller
         // $item = DB::select("SELECT * from products where product_id=$id");
         $item = Product::where('description','LIKE','%'.$id.'%')
                     ->orderBy('description','asc')
+                    //->paginate(2);
                     ->get();
         return $item;
     }
@@ -96,11 +118,37 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        return "updated successfully";
+    // public function update(Request $request, $id)
+    // {
+    //     return "updated successfully";
+    // }
+
+    public function addQuantity(Request $request){
+        //update purchase set price='$newUnitCost', quantity='$newPurchase' WHERE item_id='$item_id' and price='$oldUnitCost' and quantity='$oldPurchase'"
+        //$name = $request->input('user.name'); 
+        //dd=(json_decode($request->getContent(), true));
+        //$data = $request->json()->all();
+        return "pending query...";
+       // $item = DB::select("UPDATE product set _='$request->input('inputValue')'");
     }
 
+    public function subtractQuantity(Request $request){
+       // $item = DB::select("");        
+        return "pending query...";        
+    }
+    public function returnItem(Request $request){
+        $this->validate($request,[
+            'customerName' => 'required',
+            'itemName' => 'required',
+            'quantity' => 'required',
+            'totalPrice' => 'required',
+            'reason' => 'required',
+            'status' => 'required'
+        ]);
+       // $item = DB::select("");
+
+        return "pending query for return item...";        
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -109,6 +157,10 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = DB::select("DELETE from products where product_id=$id"); 
+        //"Delete from items where name='$item_name'"       
+        //$item = Product::find(6);
+        //return \Response::json($item);
+        return "success!";
     }
 }

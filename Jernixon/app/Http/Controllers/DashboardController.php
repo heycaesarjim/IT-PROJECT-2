@@ -18,13 +18,20 @@ class DashboardController extends Controller
         return view('dashboard.dashboard');
     }
 
-    // public function getItems(){
+    public function getItems(){
 
-    //     $data = DB::table('products')->select('*');
-    //     return Datatables::of($data)
-    //         ->make(true);
-    //         ->addColumn();
-    // }
+        $data = DB::table('products')->select('*');
+        return Datatables::of($data)
+             ->addColumn('action',function($data){
+                 return "
+                 <button class='btn btn-info' onclick='addItemToCart(this)'><i class='glyphicon glyphicon-plus'></i></button></a>";
+                    
+        
+             })
+            ->make(true);
+            //->addColumn();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,7 +61,11 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Product::where('description','LIKE','%'.$id.'%')
+        ->orderBy('description','asc')
+        //->paginate(2);
+        ->get();
+        return $item;
     }
 
     /**
@@ -90,4 +101,5 @@ class DashboardController extends Controller
     {
         //
     }
+
 }

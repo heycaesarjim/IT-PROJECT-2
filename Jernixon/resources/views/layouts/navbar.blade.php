@@ -7,19 +7,20 @@
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/logo.png')}}">
-
+        {{--  csrf_token  --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
             
         {{--  <link rel="stylesheet" href="{{asset('css/app.css')}}">  --}}
         <!-- Animation library for notifications   -->
-        <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
+        {{--  <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>  --}}
         <!--  Paper Dashboard core CSS    -->
         <link href="{{asset('assets/css/paper-dashboard.css')}}" rel="stylesheet"/>
         <!--  Fonts and icons     -->
         <link href="{{asset('css/app.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/css/fonts.css')}}" rel='stylesheet' type='text/css'>
-        <link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">
+         <link href="{{asset('assets/css/fonts.css')}}" rel='stylesheet' type='text/css'>
+        {{--  <link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">  --}}
         <!-- tab style -->
-        <link href="{{asset('assets/css/tab.css')}}" rel="stylesheet">
+        {{--  <link href="{{asset('assets/css/tab.css')}}" rel="stylesheet">  --}}
        
         <link rel="stylesheet" href="{{asset('assets/css/bootstrapv3.3.7.css')}}">
         {{--  <link href="{{asset('assets/bootstrap-4/css/bootstrap.min.css')}}" rel="stylesheet">  --}}

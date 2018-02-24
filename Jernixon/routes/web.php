@@ -15,14 +15,26 @@ Route::get('/', 'PagesController@index');
 // Route::get('/dashboard', 'PagesController@dashboard');
 //dataTable for dashboard
 //Route::get('/dashboard/getItems', 'DashboardController@getItems')->name('dashboardItems.getItems');
-Route::get('/dashboard', 'DashboardController@index');
-Route::get('/employees', 'PagesController@employees');
 
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard/getItems', 'DashboardController@getItems')->name('dashboard.getItems');
+// Route::get('/dashboard/{someData}', 'DashboardController@show')->name('dashboard.show');
+
+Route::Post('items/addQuantity','ItemsController@addQuantity');
+Route::Post('items/subtractQuantity','ItemsController@subtractQuantity');
+Route::Post('items/returnItem','ItemsController@returnItem');
 Route::get('/items/getItems', 'ItemsController@getItems')->name('items.getItems');
 Route::resource('items','ItemsController');
+
+Route::get('/reports/getTransactions', 'ReportsController@getTransactions')->name('reports.getTransactions');
+Route::get('/reports/getReturns', 'ReportsController@getReturns')->name('reports.getReturns');
+Route::get('/reports/getItemsAdded', 'ReportsController@getItemsAdded')->name('reports.getItemsAdded');
+Route::get('/reports/getRemovedItems', 'ReportsController@getRemovedItems')->name('reports.getRemovedItems');
 Route::resource('reports', 'ReportsController');
 
-Route::get('/items/{id}', 'ItemsController@show');
+Route::get('/employees', 'PagesController@employees');
+
+//Route::get('/items/{id}', 'ItemsController@show');
 
 //Route::get('/items', 'ItemsController@index');
 //Route::get('/reports', 'ReportsController@index');

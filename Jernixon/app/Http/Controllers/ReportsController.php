@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Product;
+use Datatables;
+use DB;
 class ReportsController extends Controller
 {
     /**
@@ -17,6 +19,27 @@ class ReportsController extends Controller
 
     }
 
+    public function getTransactions(){
+        $data = DB::table('products')->select('*');
+        return Datatables::of($data)
+            ->make(true);
+    }
+    public function getReturns(){
+        $data = DB::table('products')->select('*');
+        return Datatables::of($data)
+            ->make(true);
+    }
+    public function getItemsAdded(){
+        $data = DB::table('products')->select('*');
+        return Datatables::of($data)
+            ->make(true);
+    }
+    public function getRemovedItems(){
+        $data = DB::table('products')->select('*');
+        return Datatables::of($data)
+            ->make(true);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
